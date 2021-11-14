@@ -232,8 +232,8 @@
         "external_scripts" : [
             //"plugins/thirdparty/raphael.2.1.0.min.js",
             //"plugins/thirdparty/justgage.1.0.1.js"
-			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.4.min.js",
-			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/justgage.1.2.9.js"
+			"https://helmsmart-weatherstation.herokuapp.com/static/plugins/thirdparty/raphael.2.1.4.min.js",
+			"https://helmsmart-weatherstation.herokuapp.com/static/plugins/thirdparty/justgage.1.2.9.js"
         ],
         settings: [
             {

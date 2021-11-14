@@ -453,7 +453,7 @@
         display_name: "Huge Text",
         "external_scripts" : [
             //"plugins/thirdparty/jquery.sparkline.min.js"
-			   "https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
+			   "https://helmsmart-weatherstation.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
         ],
         settings: [
             {
