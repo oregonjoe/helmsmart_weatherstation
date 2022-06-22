@@ -17680,7 +17680,10 @@ def get_dbstats_html():
           values.append("---")
           
       strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value':values}
-      jsondata.append(strvalue)
+
+      if devicename != "":
+        jsondata.append(strvalue)
+
       #log.info("get_dbstats jsondata %s ", strvalue)
 
     #return jsonify( message=jsondata)
