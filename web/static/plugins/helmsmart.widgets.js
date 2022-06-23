@@ -7,7 +7,7 @@
 // │ Licensed under the MIT license.                                    │ \\
 // └────────────────────────────────────────────────────────────────────┘ \\
 
-	var MAX_NUM_ZONES = 3;
+	var MAX_NUM_ZONES = 6;
 
 (function () {
 	var SPARKLINE_HISTORY_LENGTH = 100;
