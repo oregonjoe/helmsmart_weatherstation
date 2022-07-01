@@ -3809,6 +3809,53 @@
 				updatePositions(2);
 		
 		}
+		
+		else if (settingName == "zone3") {
+				 position = newValue[0];
+				 currentPosition.lon = position.lng;
+				 currentPosition.lat = position.lat;
+		
+				try {
+				 currentWind.speed = position.truewindspeed;
+				 currentWind.direction = position.truewinddir;
+				}
+				catch(err) { };
+		
+				updatePositions(3);
+		
+		}
+		else if (settingName == "zone4") {
+				 position = newValue[0];
+				 currentPosition.lon = position.lng;
+				 currentPosition.lat = position.lat;
+		
+				try {
+				 currentWind.speed = position.truewindspeed;
+				 currentWind.direction = position.truewinddir;
+				}
+				catch(err) { };
+		
+				updatePositions(4);
+		
+		}
+		else if (settingName == "zone5") {
+				 position = newValue[0];
+				 currentPosition.lon = position.lng;
+				 currentPosition.lat = position.lat;
+		
+				try {
+				 currentWind.speed = position.truewindspeed;
+				 currentWind.direction = position.truewinddir;
+				}
+				catch(err) { };
+		
+				updatePositions(5);
+		
+		}
+		
+		
+		
+		
 		};
 
         this.onDispose = function () {
