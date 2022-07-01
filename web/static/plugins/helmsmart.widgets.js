@@ -3203,7 +3203,7 @@
                // map.panTo(newLatLon);
 				
 				//now fit the map to the newly inclusive bounds
-				map.fitBounds(bounds);
+				//map.fitBounds(bounds);
 				
 				
 				//newpoly[i] = new google.maps.Polyline(mypolyOptions);
@@ -3621,6 +3621,16 @@
 				
 			//}
 
+			
+			
+			
+			google.maps.event.addDomListener(element, 'click', function (e) {
+                   map.fitBounds(bounds);
+                });
+			
+			
+			
+			
                 google.maps.event.addDomListener(element, 'mouseenter', function (e) {
                     e.cancelBubble = true;
                     if (!map.hover) {
