@@ -3205,7 +3205,7 @@
                // map.panTo(newLatLon);
 				
 				//now fit the map to the newly inclusive bounds
-				//map.fitBounds(bounds);
+				map.fitBounds(bounds);
 				
 				
 				//newpoly[i] = new google.maps.Polyline(mypolyOptions);
@@ -3623,7 +3623,7 @@
 				
 			//}
 
-			
+			/*
 							try {	
 					google.maps.event.addDomListener(element, 'click', function (e) {
                    map.fitBounds(bounds);
@@ -3634,7 +3634,7 @@
 				console.log("\t" + err.toString());
 				};
 			
-			
+			*/
 			
 			
 			
