@@ -3604,7 +3604,7 @@
         // to the map type control.
         map = new google.maps.Map(element, {
           center: {lat: -124.26833, lng: 42.05038},
-          zoom: 11,
+          zoom: 8,
           mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
                     'styled_map']
