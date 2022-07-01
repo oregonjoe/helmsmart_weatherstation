@@ -3205,7 +3205,11 @@
                // map.panTo(newLatLon);
 				
 				//now fit the map to the newly inclusive bounds
+				
+				var myzoom = map.getZoom();
 				map.fitBounds(bounds);
+				
+				map.setZoom(8);
 				
 				
 				//newpoly[i] = new google.maps.Polyline(mypolyOptions);
