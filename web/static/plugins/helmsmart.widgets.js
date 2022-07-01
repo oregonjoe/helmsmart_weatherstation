@@ -3203,7 +3203,20 @@
 				}
 				
                // map.panTo(newLatLon);
+			   
+			   // Ensure the map does not get too zoomed out when fitting the bounds.
+				map.setOptions({maxZoom: 14});
+				// Clear the minZoom only after the map fits the bounds (note that
+				// fitBounds() is asynchronous). The 'idle' event fires when the map
+				// becomes idle after panning or zooming.
+				google.maps.event.addListenerOnce(map, 'idle', function() {
+				  map.setOptions({maxZoom: null});
+				});
+			   
+				map.fitBounds(bounds);
 				
+				
+				/*
 				//now fit the map to the newly inclusive bounds
 				try{
 					var myzoom = map.getZoom();
@@ -3217,7 +3230,7 @@
 					
 					map.setZoom(8);
 				};
-				
+				*/
 				
 				//newpoly[i] = new google.maps.Polyline(mypolyOptions);
 				
