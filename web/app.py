@@ -10621,7 +10621,7 @@ def freeboard_location_wind():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
-    postype = request.args.get('type',"NULL")
+    windtype = request.args.get('type',"true")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
@@ -10684,9 +10684,28 @@ def freeboard_location_wind():
     if source != "":
       serieskeys= serieskeys + "source = '" + source + "' AND "
 
+
+
+
+
+
+
+
       
     serieskeys= serieskeys +  " sensor='position_rapid' OR sensor='wind_data'"
-    serieskeys= serieskeys +  "  AND type='" + postype + "' OR type='TWIND True North' "
+
+
+    
+    #serieskeys= serieskeys +  "  AND type='" + postype + "' OR type='TWIND True North' "
+
+
+
+    if  windtype =="apparent":
+      serieskeys= serieskeys +  " AND (type='Apparent Wind' OR type='Gust' ) "
+    else  :
+      serieskeys= serieskeys +  " AND (type='TWIND True North' OR type='Gust' ) "
+
+    
  
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
