@@ -3127,6 +3127,8 @@
 		var myLatlng;
 		var myOldLatlng;
 		
+		var bounds;
+		
 		
 		var newpoly = new Array();
 		var mypolyOptions = {
@@ -3186,7 +3188,7 @@
 				}
 				
 				
-				var bounds = new google.maps.LatLngBounds();
+				 bounds = new google.maps.LatLngBounds();
 	//var infowindow = new google.maps.InfoWindow();
 				for (i = 0; i < MAX_NUM_ZONES; i++) {
 					  //extend the bounds to include each marker's position
@@ -3622,11 +3624,17 @@
 			//}
 
 			
-			
-			
-			google.maps.event.addDomListener(element, 'click', function (e) {
+							try {	
+					google.maps.event.addDomListener(element, 'click', function (e) {
                    map.fitBounds(bounds);
                 });
+				}
+				catch(err) {
+				console.log("error object toString():");
+				console.log("\t" + err.toString());
+				};
+			
+			
 			
 			
 			
