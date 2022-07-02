@@ -3206,7 +3206,7 @@
 			   
 			   
 			   try{
-					var zoomLevel = _.isUndefined(currentSettings.mapzoom) ? 0: currentSettings.mapzoom;
+					var zoomLevel = _.isUndefined(currentSettings.mapzoom) ? 0: parseInt(currentSettings.mapzoom);
 				}
 				catch(err)
 				{
@@ -3229,7 +3229,7 @@
 				}
 				else{
 					
-					map.setZoom(zoomLevel);
+					map.setZoom(parseInt(zoomLevel));
 				}
 				
 				/*
@@ -4015,6 +4015,7 @@
                 name: "mapzoom",
                 display_name: "Map Zoom",
                 type: "option",
+				default_value: 0,
                 options: [
                     {
                         name: "Auto Zoom",
