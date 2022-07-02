@@ -3206,7 +3206,7 @@
 			   
 			   
 			   try{
-					var zoomLevel = currentSettings.mapzoom;
+					var zoomLevel = _.isUndefined(currentSettings.mapzoom) ? 0: currentSettings.mapzoom;
 				}
 				catch(err)
 				{
