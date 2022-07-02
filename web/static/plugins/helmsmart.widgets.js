@@ -3204,17 +3204,33 @@
 				
                // map.panTo(newLatLon);
 			   
-			   // Ensure the map does not get too zoomed out when fitting the bounds.
-				map.setOptions({maxZoom: 14});
-				// Clear the minZoom only after the map fits the bounds (note that
-				// fitBounds() is asynchronous). The 'idle' event fires when the map
-				// becomes idle after panning or zooming.
-				google.maps.event.addListenerOnce(map, 'idle', function() {
-				  map.setOptions({maxZoom: null});
-				});
 			   
-				map.fitBounds(bounds);
-				
+			   try{
+					var zoomLevel = currentSettings.mapzoom;
+				}
+				catch(err)
+				{
+					var zoomLevel = 0;
+				}
+				   
+			   if (zoomLevel == 0)
+			   {
+			   
+				   // Ensure the map does not get too zoomed out when fitting the bounds.
+					map.setOptions({maxZoom: 14});
+					// Clear the minZoom only after the map fits the bounds (note that
+					// fitBounds() is asynchronous). The 'idle' event fires when the map
+					// becomes idle after panning or zooming.
+					google.maps.event.addListenerOnce(map, 'idle', function() {
+					  map.setOptions({maxZoom: null});
+					});
+				   
+					map.fitBounds(bounds);
+				}
+				else{
+					
+					map.setZoom(zoomLevel);
+				}
 				
 				/*
 				//now fit the map to the newly inclusive bounds
@@ -3995,7 +4011,33 @@
                     }
                 ]
             },
-			
+				{
+                name: "mapzoom",
+                display_name: "Map Zoom",
+                type: "option",
+                options: [
+                    {
+                        name: "Auto Zoom",
+                        value: "0"
+                    },
+					{
+                        name: "small",
+                        value: "4"
+                    },
+                    {
+                        name: "medium",
+                        value: "8"
+                    },
+					{
+                        name: "large",
+                        value: "12"
+                    },
+					{
+                        name: "Huge",
+                        value: "16"
+                    }
+                ]
+            },
 			// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 			{
 			"name": "trailColor",
