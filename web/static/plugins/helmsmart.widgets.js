@@ -3647,6 +3647,10 @@
         map = new google.maps.Map(element, {
           center: {lat: -124.26833, lng: 42.05038},
           zoom: 8,
+
+			gestureHandling: "greedy",
+			zoomControl: true,
+			
           mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
                     'styled_map']
@@ -3920,8 +3924,8 @@
         }
 
         this.getHeight = function () {
-           return 4;
-			//return _.isUndefined(currentSettings.blocks) ? 4: currentSettings.blocks;
+           //return 4;
+			return _.isUndefined(currentSettings.blocks) ? 4: parseInt(currentSettings.blocks);
 		    //return currentSettings.blocks;
        
         }
