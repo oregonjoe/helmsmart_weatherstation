@@ -3649,7 +3649,7 @@
           center: {lat: -124.26833, lng: 42.05038},
           zoom: 8,
 
-			gestureHandling: "greedy",
+			gestureHandling: "cooperative",
 			zoomControl: true,
 			
           mapTypeControlOptions: {
@@ -3925,10 +3925,10 @@
         }
 
         this.getHeight = function () {
-           //return 4;
+           return 4;
 			//return _.isUndefined(currentSettings.blocks) ? 4: parseInt(currentSettings.blocks);
 			
-			return _.isUndefined(currentSettings.blocks) ? 4: currentSettings.blocks;
+			//return _.isUndefined(currentSettings.blocks) ? 4: currentSettings.blocks;
 		    //return currentSettings.blocks;
        
         }
