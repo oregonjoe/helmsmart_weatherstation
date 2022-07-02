@@ -3229,6 +3229,7 @@
 				}
 				else{
 					
+					map.fitBounds(bounds);
 					map.setZoom(parseInt(zoomLevel));
 				}
 				
@@ -3925,7 +3926,9 @@
 
         this.getHeight = function () {
            //return 4;
-			return _.isUndefined(currentSettings.blocks) ? 4: parseInt(currentSettings.blocks);
+			//return _.isUndefined(currentSettings.blocks) ? 4: parseInt(currentSettings.blocks);
+			
+			return _.isUndefined(currentSettings.blocks) ? 4: currentSettings.blocks;
 		    //return currentSettings.blocks;
        
         }
