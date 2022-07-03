@@ -3229,6 +3229,12 @@
 				}
 				else if (zoomLevel == 255)
 				{
+					
+					map.setOptions({
+					   panControl: true,
+					   zoomControl: true
+					});
+					
 					var myzoomLevel = map.getZoom();
 					var myCenter = map.getCenter();
 					
@@ -3236,6 +3242,12 @@
 					  map.setZoom(parseInt(myzoomLevel));
 					  map.setCenter(myCenter);
 					});
+					
+					
+					//google.maps.event.addListenerOnce(map, 'idle', function() {
+					//  map.setZoom(parseInt(myzoomLevel));
+					//  map.setCenter(myCenter);
+					//});
 					
 					map.fitBounds(bounds);
 					//map.setZoom(parseInt(zoomLevel));
