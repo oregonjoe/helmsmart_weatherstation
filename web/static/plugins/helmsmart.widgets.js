@@ -3234,7 +3234,7 @@
 					
 					google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
 					  map.setZoom(parseInt(myzoomLevel));
-					  map.setCenter(parseInt(myCenter));
+					  map.setCenter(myCenter);
 					});
 					
 					map.fitBounds(bounds);
