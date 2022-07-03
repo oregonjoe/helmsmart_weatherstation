@@ -3229,7 +3229,12 @@
 				}
 				else{
 					
-					map.fitBounds(bounds);
+					
+					//google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+					//  map.setZoom(parseInt(zoomLevel));
+					//});
+					
+					//map.fitBounds(bounds);
 					map.setZoom(parseInt(zoomLevel));
 				}
 				
