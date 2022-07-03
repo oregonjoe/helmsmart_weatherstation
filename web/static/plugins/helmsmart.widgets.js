@@ -3227,6 +3227,19 @@
 				   
 					map.fitBounds(bounds);
 				}
+				else if (zoomLevel == 255)
+				{
+					var myzoomLevel = map.getZoom();
+					var myCenter = map.getCenter();
+					
+					google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+					  map.setZoom(parseInt(myzoomLevel));
+					  map.setCenter(parseInt(myCenter));
+					});
+					
+					map.fitBounds(bounds);
+					//map.setZoom(parseInt(zoomLevel));
+				}
 				else{
 					
 					
@@ -4048,6 +4061,10 @@
 					{
                         name: "Huge",
                         value: "16"
+                    },
+					{
+                        name: "Manual",
+                        value: "255"
                     }
                 ]
             },
