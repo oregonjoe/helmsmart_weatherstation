@@ -3238,18 +3238,18 @@
 					var myzoomLevel = map.getZoom();
 					var myCenter = map.getCenter();
 					
-					google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
-					  map.setZoom(parseInt(myzoomLevel));
-					  map.setCenter(myCenter);
-					});
-					
-					
-					//google.maps.event.addListenerOnce(map, 'idle', function() {
+					//google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
 					//  map.setZoom(parseInt(myzoomLevel));
 					//  map.setCenter(myCenter);
 					//});
 					
-					map.fitBounds(bounds);
+					
+					google.maps.event.addListenerOnce(map, 'idle', function() {
+					  map.setZoom(parseInt(myzoomLevel));
+					  map.setCenter(myCenter);
+					});
+					
+					//map.fitBounds(bounds);
 					//map.setZoom(parseInt(zoomLevel));
 				}
 				else{
