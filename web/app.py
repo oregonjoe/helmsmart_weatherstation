@@ -9768,7 +9768,9 @@ def freeboard_winddata():
    
 
       
-
+    except TypeError, e:
+        #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
      
     
     except:
