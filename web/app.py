@@ -9755,16 +9755,37 @@ def freeboard_winddata():
         wind_gusts.append({'epoch':ts, 'value':value3})
        
 
+      avgwindspeed = sum(windspeedavg) / float(len(windspeedavg))
+      avgwinddir = sum(winddiravg) / float(len(winddiravg))
+
+      average_windspeed=[]
+      average_winddir=[]
+      
+      for point in points:
+        
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
+          ts = int(mktime(dtt)*1000)
+          
+          average_windspeed.append( {'epoch':ts, 'value':avgwindspeed})
+          average_winddir.append( {'epoch':ts, 'value':avgwinddir})
+
       callback = request.args.get('callback')
       myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
-      average_windspeed = {'epoch':ts, 'value': (sum(windspeedavg) / float(len(windspeedavg)))}
-      average_winddir = {'epoch':ts, 'value': (sum(winddiravg) / float(len(winddiravg)))}
+
       
       if  windtype =="apparent":
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':average_windspeed, "averagewinddir":average_winddir})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':list(reversed(average_windspeed)), "averagewinddir":list(reversed(average_winddir))})
       else:
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':average_windspeed, "averagewinddir":average_winddir})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':list(reversed(average_windspeed)), "averagewinddir":list(reversed(average_winddir))})
    
 
       
