@@ -9758,6 +9758,9 @@ def freeboard_winddata():
       avgwindspeed = sum(windspeedavg) / float(len(windspeedavg))
       avgwinddir = sum(winddiravg) / float(len(winddiravg))
 
+      avgwindspeed = float("{0:.1f}".format(avgwindspeed))
+      avgwinddir = float("{0:.1f}".format(avgwinddir))
+
       average_windspeed=[]
       average_winddir=[]
       
