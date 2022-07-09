@@ -9762,9 +9762,9 @@ def freeboard_winddata():
       average_winddir = {'epoch':ts, 'value': (sum(winddiravg) / float(len(winddiravg)))}
       
       if  windtype =="apparent":
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':list(reversed(average_windspeed)), "averagewinddir":laverage_winddir})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':average_windspeed, "averagewinddir":average_winddir})
       else:
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':list(reversed(average_windspeed)), "averagewinddir":average_winddir})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':average_windspeed, "averagewinddir":average_winddir})
    
 
       
