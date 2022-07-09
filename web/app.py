@@ -9713,6 +9713,8 @@ def freeboard_winddata():
       wind_speed=[]
       wind_direction=[]
       wind_gusts=[]
+      windspeedavg=[]
+      winddiravg=[]
 
       ts =startepoch*1000
  
@@ -9740,10 +9742,12 @@ def freeboard_winddata():
 
         if point['wind_speed'] is not None:       
           value1 = convertfbunits(point['wind_speed'],  convertunittype('speed', units))
+          windspeedavg.append(value1)
         wind_speed.append({'epoch':ts, 'value':value1})
           
         if point['wind_direction'] is not None:       
           value2 = convertfbunits(point['wind_direction'], 16)
+          winddiravg.append(value2)
         wind_direction.append({'epoch':ts, 'value':value2})
 
         if point['wind_gusts'] is not None:       
@@ -9754,11 +9758,13 @@ def freeboard_winddata():
       callback = request.args.get('callback')
       myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
+      average_windspeed = sum(windspeedavg) / float(len(windspeedavg))
+      average_winddir = sum(winddiravg) / float(len(winddiravg))
       
       if  windtype =="apparent":
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':average_windspeed, "averagewinddir":average_winddir})
       else:
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts)), 'averagewindspeed':average_windspeed, "averagewinddir":average_winddir})
    
 
       
