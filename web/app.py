@@ -8647,7 +8647,7 @@ def freeboard_rain_gauge():
 
     if mode == "median":
       
-      query = ('select  median(accumulation) AS accumulation, median("duration") AS  "duration", median(rate) AS rate, median(peak) AS  peak from {} '
+      query = ('select  median(accumulation) AS accumulation, median("rainduration") AS  "duration", median(rate) AS rate, median(peak) AS  peak from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -8656,7 +8656,7 @@ def freeboard_rain_gauge():
       
     elif mode == "max":
       
-      query = ('select  max(accumulation) AS accumulation, max("duration") AS  "duration", max(rate) AS rate, max(peak) AS  peak  from {} '
+      query = ('select  max(accumulation) AS accumulation, max("rainduration") AS  "duration", max(rate) AS rate, max(peak) AS  peak  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -8666,7 +8666,7 @@ def freeboard_rain_gauge():
       
     elif mode == "min":
       
-      query = ('select  min(accumulation) AS accumulation, min("duration") AS  "duration", min(rate) AS rate, min(peak) AS  peak from {} '
+      query = ('select  min(accumulation) AS accumulation, min("rainduration") AS  "duration", min(rate) AS rate, min(peak) AS  peak from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -8674,7 +8674,7 @@ def freeboard_rain_gauge():
                         resolution)      
       
     else:       
-      query = ('select  mean(accumulation) AS accumulation, mean("duration") AS  "duration", mean(rate) AS rate, mean(peak) AS  peak  from {} '
+      query = ('select  mean(accumulation) AS accumulation, mean("rainduration") AS  "duration", mean(rate) AS rate, mean(peak) AS  peak  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -8799,14 +8799,14 @@ def freeboard_rain_gauge():
 
 
         # duration is in hours so scale to seconds = 1/(60*60 )        
-        if point['duration'] is not None:       
+        if point['rainduration'] is not None:       
           value2 = convertfbunits((point['duration'] * 3600), 37)
         duration.append({'epoch':ts, 'value':value2})
 
         # duration is in hours so scale to min
         if point['duration'] is not None:       
           #value5 = convertfbunits(point['duration'], 37)
-          value5 = float("{0:.2f}".format(point['duration'] * 60))  
+          value5 = float("{0:.2f}".format(point['rainduration'] * 60))  
         duration_min.append({'epoch':ts, 'value':value5})
 
         if point['rate'] is not None: 
