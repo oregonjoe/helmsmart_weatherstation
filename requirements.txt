@@ -36,7 +36,7 @@ redis==2.9.1
 rq==0.5.5
 #python-postmark==0.4.1
 APScheduler==2.0.3
-dropbox==2.2.0
+#dropbox==2.2.0
 #numpy==1.6.2
 geopy==1.9.1
 requests>=2.0
