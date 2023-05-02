@@ -236,9 +236,11 @@ def dashboards_list():
             if cursor.rowcount > 0:
 
                 session['userid'] = str(i[0])
-                #session['adminid'] = verificationdata['email']
+                log.info('dashboards_list.html: got user from database userid is  %s:  ' , session['userid'] )
+                
             else:
                 session['userid'] = hash_string('helmsmart@mockmyid.com')
+                log.info('dashboards_list.html: using default userid is  %s:  ' , session['userid'] )
                 
             log.info('dashboards_list.html: userid is  %s:  ' , session['userid'] )
             # cursor.close
