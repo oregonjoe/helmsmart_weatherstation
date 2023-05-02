@@ -202,7 +202,8 @@ def dashboards_list():
          
 
           if mydata['name'] is not None:
-            myusername = mydata['name']
+            #myusername = mydata['name']
+            myusername = mydata['email']
             log.info("dashboards_list.html: myusername:%s", myusername)
 
 
