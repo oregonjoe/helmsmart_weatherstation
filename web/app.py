@@ -5398,10 +5398,10 @@ def freeboard_rain_gauge():
  
       points = list(response.get_points())
 
-      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         value1 = '---'
         value2 = '---'
         value3 = '---'
@@ -5432,11 +5432,11 @@ def freeboard_rain_gauge():
 
             # get seconds offset for selected timezone
             tzoffset = mydatetimetz.utcoffset().total_seconds()
-            ##log.info('freeboard_environmental:: tzoffset %s:  ' % tzoffset)           
+            ##log.info('freeboard_rain_gauge:: tzoffset %s:  ' % tzoffset)           
 
             # adjust GMT time for slected timezone for display purposes
             ts = int((mydatetime.timestamp() + tzoffset) * 1000 )
-            ##log.info('freeboard_environmental:: ts %s:  ' % ts)
+            log.info('freeboard_rain_gauge:: ts %s:  ' % ts)
 
         if point['accumulation'] is not None:       
           value1 = convertfbunits((float(point['accumulation'])),  convertunittype('rain', units))
