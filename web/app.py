@@ -5318,42 +5318,42 @@ def freeboard_rain_gauge():
         response= dbc.query(query)
         
     except TypeError as e:
-        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+        log.info('freeboard_rain_gauge: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard_rain_gauge: Type Error in InfluxDB mydata append %s:  ' % str(e))
             
     except KeyError as e:
-        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+        log.info('freeboard_rain_gauge: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard_rain_gauge: Key Error in InfluxDB mydata append %s:  ' % str(e))
 
     except NameError as e:
-        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+        log.info('freeboard_rain_gauge: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard_rain_gauge: Name Error in InfluxDB mydata append %s:  ' % str(e))
             
     except IndexError as e:
-        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+        log.info('freeboard_rain_gauge: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard_rain_gauge: Index Error in InfluxDB mydata append %s:  ' % str(e))  
 
     except ValueError as e:
       #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
-      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+      log.info('freeboard_rain_gauge: Value Error in InfluxDB  %s:  ' % str(e))
 
     except AttributeError as e:
       #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
-      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+      log.info('freeboard_rain_gauge: AttributeError in InfluxDB  %s:  ' % str(e))     
 
     except InfluxDBClientError as e:
-      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+      log.info('freeboard_rain_gauge: Exception Error in InfluxDB  %s:  ' % str(e))
 
 
             
     except:
-        log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+        log.info('freeboard_rain_gauge: Error in InfluxDB mydata append %s:', response)
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
         pass
 
     if response is None:
-        log.info('freeboard: InfluxDB Query has no data ')
+        log.info('freeboard_rain_gauge: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
         
@@ -5362,7 +5362,7 @@ def freeboard_rain_gauge():
 
 
     if not response:
-        log.info('freeboard: InfluxDB Query has no data ')
+        log.info('freeboard_rain_gauge: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
       
@@ -5476,13 +5476,15 @@ def freeboard_rain_gauge():
    
 
       
-
+    except KeyError as e:
+        log.info('freeboard_rain_gauge: Key Error in InfluxDB mydata append %s:  ', strvalue)
+        log.info('freeboard_rain_gauge: Key Error in InfluxDB mydata append %s:  ' % str(e))
      
     
     except:
-        log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
+        log.info('freeboard_rain_gauge: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
-        log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+        log.info('freeboard_rain_gauge: Error in geting freeboard ststs %s:  ' % e)
         #return jsonify(update=False, status='missing' )
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
