@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #helmsmart-weatherstation 051023
 
+=======
+#helmsmart-weatherstation 050823
+# git push test
+>>>>>>> a9b47008bca7646a4a8a7bdbcaa51a34bc39d845
 import os
 from os import environ
 from os import environ as env, path
