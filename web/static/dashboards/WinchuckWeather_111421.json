@@ -2,9 +2,9 @@
 	"version": 1,
 	"allow_edit": true,
 	"plugins": [
-		"https://helmsmart-weatherstation.herokuapp.com/static/plugins/helmsmart.widgets.js",
-		"https://helmsmart-weatherstation.herokuapp.com/static/plugins/helmsmart.datasources.js",
-		"https://helmsmart-weatherstation.herokuapp.com/static/plugins/plugin_highcharts_historical.js"
+		"https://helmsmart-weatherstation-2559be3f96e6.herokuapp.com/static/plugins/helmsmart.widgets.js",
+		"https://helmsmart-weatherstation-2559be3f96e6.herokuapp.com/static/plugins/helmsmart.datasources.js",
+		"https://helmsmart-weatherstation-2559be3f96e6.herokuapp.com/static/plugins/plugin_highcharts_historical.js"
 	],
 	"panes": [
 		{
@@ -204,7 +204,7 @@
 			"name": "SeaDream Wind",
 			"type": "JSON",
 			"settings": {
-				"url": "https://helmsmart-weatherstation.herokuapp.com/freeboard_winddata",
+				"url": "https://helmsmart-weatherstation-2559be3f96e6.herokuapp.com/freeboard_winddata",
 				"apikey": "a5069b96637473d7701fa11eb9baad3d",
 				"refresh": 30,
 				"span": "1day",
@@ -221,7 +221,7 @@
 			"name": "SeaDream Environmental",
 			"type": "JSON",
 			"settings": {
-				"url": "https://helmsmart-weatherstation.herokuapp.com/freeboard_environmental",
+				"url": "https://helmsmart-weatherstation-2559be3f96e6.herokuapp.com/freeboard_environmental",
 				"apikey": "a5069b96637473d7701fa11eb9baad3d",
 				"refresh": 60,
 				"span": "1day",
@@ -238,7 +238,7 @@
 			"name": "SeaDream Location",
 			"type": "JSON",
 			"settings": {
-				"url": "https://helmsmart-weatherstation.herokuapp.com/freeboard_location",
+				"url": "https://helmsmart-weatherstation-2559be3f96e6.herokuapp.com/freeboard_location",
 				"apikey": "a5069b96637473d7701fa11eb9baad3d",
 				"refresh": 15,
 				"span": "12hour",
@@ -255,7 +255,7 @@
 			"name": "Engine Fuel used",
 			"type": "JSON",
 			"settings": {
-				"url": "https://helmsmart-weatherstation.herokuapp.com/freeboard_engine_aux",
+				"url": "https://helmsmart-weatherstation-2559be3f96e6.herokuapp.com/freeboard_engine_aux",
 				"apikey": "a5069b96637473d7701fa11eb9baad3d",
 				"refresh": 30,
 				"span": "15min",
