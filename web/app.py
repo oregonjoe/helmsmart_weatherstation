@@ -1214,7 +1214,7 @@ def get_apistat():
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-    myfiledate = mydatetime.strftime('%m%d%Y%H%M%S'))
+    myfiledate = mydatetime.strftime('%m%d%Y%H%M%S')
 
     #return '{0}({1})'.format(callback, {'response':response})
 
