@@ -1214,6 +1214,8 @@ def get_apistat():
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
+    myfiledate = mydatetime.strftime('%m%d%Y%H%M%S'))
+
     #return '{0}({1})'.format(callback, {'response':response})
 
     if dataformat == 'json':
@@ -1235,7 +1237,7 @@ def get_apistat():
 
       response = make_response(strvalue)
       response.headers['Content-Type'] = 'text/csv'
-      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPILOG_"+ deviceapikey + ".csv"
+      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPILOG_"+ deviceapikey + "_" + myfiledate + ".csv"
       return response
       
 
