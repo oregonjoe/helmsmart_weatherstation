@@ -1075,17 +1075,12 @@ def get_apistat():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' "
 
-    query = ('select {}(apidata) AS apidata FROM {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by *, time({}s) ') \
-                .format(rollup,  measurement,  serieskeys,
-                        startepoch, endepoch,
-                        resolution) 
-
+    #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,  serieskeys, startepoch, endepoch, resolution) 
+    query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,   startepoch, endepoch, resolution) 
 
 
     #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
-    query = ('select {}(apidata) AS apidata FROM {} where time > {}s and time < {}s ').format(rollup,  measurement,   startepoch, endepoch)
+    #query = ('select {}(apidata) AS apidata FROM {} where time > {}s and time < {}s ').format(rollup,  measurement,   startepoch, endepoch)
     
     
     log.info("get_apistat inFlux-cloud Query %s", query)
