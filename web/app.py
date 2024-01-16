@@ -39,6 +39,7 @@ from influxdb.influxdb08 import InfluxDBClient
 
 from influxdb import InfluxDBClient as InfluxDBCloud
 from influxdb.client import InfluxDBClientError
+from influxdb.client import InfluxDBServerError
 
 import logging
 # *******************************************************************
@@ -769,6 +770,357 @@ def getuseremail(deviceapikey):
     db_pool.putconn(conn)                       
 
     return ""
+
+### INFLUX API CALLS #####
+
+def update_api_log(apikey, userdata, apifunction, apidata):
+
+
+  #userdata = getuserinfo(deviceapikey)
+  #log.info("freeboard get_apistat userdata %s", userdata)
+  
+  useremail = userdata.get('useremail',"")
+  log.info("freeboard get_apistat useremail %s", useremail)
+
+  deviceid = userdata.get('deviceid',"")
+  log.info("freeboard get_apistat deviceid %s", deviceid)
+
+  devicename = userdata.get('devicename',"")
+  log.info("freeboard get_apistat devicename %s", devicename)
+
+  
+  try:
+
+    #IFDBhost = os.environ.get('IFDBhost')
+    #IFDBport = os.environ.get('IFDBport')
+    #IFDBusername = os.environ.get('IFDBusername')
+    #IFDBpassword = os.environ.get('IFDBpassword')
+    #IFDBdatabase = os.environ.get('IFDBdatabase')
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+    
+
+    #dbc = InfluxDBCloud(IFDBhost, IFDBport, IFDBusername, IFDBpassword, IFDBdatabase,  ssl=True)
+    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+    #if debug_all: log.info('Sync:  InfluxDB write %s:  ', mydata)
+    #if debug_all: log.info('Sync:  InfluxDB-Cloud write %s points', len(mydataIDBC))
+    if debug_all: log.info('update_api_log:  InfluxDB-Cloud write device=%s  apidata = %s', deviceid, apidata)
+    #db.write_points_with_precision(mydata, time_precision='ms')
+
+
+    #Add count of number of records written to local status
+    #mydataIDBC.append(convert_influxdbcloud_json(record[TIMESTAMP], int(len(mydataIDBC)),   'deviceid:' + record[DEVICE] + '.sensor:helmsmartstat.source:FF.instance:0.type:NULL.parameter:apiindex.HelmSmart'   ) )         
+
+    #Add count of number of records written to global status
+    ts = int(time.time()) * 1000
+    #if debug_all: log.info('insert_influxdb_cloud: convert_influxdbcloud_json ts %s:  ', ts)
+  
+    myjsonkeys = {'apikey':apikey,  'deviceid': deviceid, 'useremail':useremail , 'devicename':devicename , 'apifunction':apifunction}
+    #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
+    if debug_all: log.info('update_api_log:  myjsonkeys %s:  ', myjsonkeys)
+    
+      
+    #values = {'records':len(mydataIDBC)}
+    values = {'apidata':apidata}
+    #measurement = 'HS_'+str(tag0[1])
+    #measurement = 'HelmSmartDB'
+    measurement = "HelmSmartAPI"
+    #measurement = 'HS_' + str(deviceid)
+    if debug_all: log.info('update_api_log: values %s:  ', values)
+    
+    ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}
+    #mydataIDBC.append(ifluxjson)
+    if debug_all: log.info('update_api_log:  ifluxjson %s:  ', ifluxjson)
+
+    mydataIDBC = []
+    mydataIDBC.append(ifluxjson)
+
+    
+    dbc.write_points(mydataIDBC, time_precision='ms')
+    #shim.write_multi(mydata)
+    if debug_all: log.info("update_api_log: write_points influxDB-Cloud! %s", deviceid)
+
+    
+  #except influxdb.InfluxDBClientError as e:   
+  except InfluxDBClientError as e:
+
+    if debug_all: log.error('update_api_log: InfluxDBServerError error in InfluxDB-Cloud write %s:  ' % str(e))
+
+  except InfluxDBServerError as e:
+    if debug_all: log.info('update_api_log:  InfluxDB-Cloud write device=%s  points = %s', deviceid, apifunction)
+    if debug_all: log.info('update_api_log: inFlux error in InfluxDBServer-Cloud write %s:  ' % str(e))    
+    if debug_all: log.error('update_api_log: inFlux error in InfluxDBServer-Cloud write %s:  ' % str(e))
+    pass
+    
+  except TypeError as e:
+    if debug_all: log.error('update_api_log: TypeError in InfluxDB-Cloud write %s:  ', userdata)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.error('update_api_log: TypeError in InfluxDB-Cloud write %s:  ' % str(e))
+    
+  except KeyError as e:
+    if debug_all: log.error('update_api_log: KeyError in InfluxDB-Cloud write %s:  ', userdata)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.error('update_api_log: KeyError in InfluxDB-Cloud write %s:  ' % str(e))
+
+  except NameError as e:
+    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ', userdata)
+    #e = sys.exc_info()[0]
+
+  except AttributeError as e:
+    if debug_all: log.error('update_api_log: AttributeError in InfluxDB-Cloud write %s:  ', userdata)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.error('update_api_log: AttributeError in InfluxDB-Cloud write %s:  ' % str(e))   
+    
+    
+  except:
+    if debug_all: log.error('update_api_log: Error in InfluxDB-Cloud write %s:  ', userdata)
+    e = sys.exc_info()[0]
+    if debug_all: log.error("Error: %s" % e)
+    
+  if debug_all: log.info("update_api_log - inserted into influxDB-Cloud! %s", deviceid)          
+
+
+
+@app.route('/get_apistat')
+@cross_origin()
+def get_apistat():
+
+  deviceapikey = request.args.get('apikey','')
+  Interval = request.args.get('interval',"5min")
+  rollup = request.args.get('mode',"sum")
+
+  resolution = request.args.get('resolution',"")
+  mytimezone = request.args.get('timezone',"UTC")
+  response = None
+
+
+  mydatetime = datetime.datetime.now()
+  myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
+  
+  starttime = request.args.get('start','0')
+  
+  response = None
+  
+
+  if int(starttime) != 0:
+    epochtimes = getendepochtimes(int(starttime), Interval)
+    
+  else:
+    epochtimes = getepochtimes(Interval)
+
+  
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  if resolution == "":
+    resolution = epochtimes[2]
+
+  
+  userdata = getuserinfo(deviceapikey)
+  log.info("freeboard get_apistat userdata %s", userdata)
+  
+  useremail = userdata.get('useremail',"")
+  log.info("freeboard get_apistat useremail %s", useremail)
+
+
+  deviceid = userdata.get('deviceid',"")
+  
+  log.info("freeboard get_apistat deviceid %s", deviceid)
+
+  if deviceid == "":
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+  measurement = "HelmSmart"
+  measurement = 'HS_' + str(deviceid)
+
+
+  devicename = userdata.get('devicename',"")
+  log.info("freeboard get_apistat devicename %s", devicename)  
+
+  response = None
+  
+  measurement = "HelmSmartAPI"
+  
+  stat0 = '---'
+  stat1 = '---'
+  stat2 = '---'
+  stat3 = '---'
+  stat4 = '---'
+  stat5 = '---'
+  stat6 = '---'
+  stat7 = '---'
+  stat8 = '---'
+  stat9 = '---'
+  stat10 = '---'
+  stat11 = '---'
+  stat12 = '---'
+  stat13 = '---'
+  stat14 = '---'
+  stat15 = '---'
+  stat16 = '---'
+
+
+  #conn = db_pool.getconn()
+
+  #cursor = conn.cursor()
+  #cursor.execute("select deviceid, devicename from user_devices")
+  #records = cursor.fetchall()
+
+  #db_pool.putconn(conn)   
+
+
+
+  try:
+   
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+     
+
+    
+    start = datetime.datetime.fromtimestamp(float(startepoch))
+    
+
+    end = datetime.datetime.fromtimestamp(float(endepoch))
+    resolutionstr = "PT" + str(resolution) + "S"
+
+    #rollup = "mean"
+
+    serieskeys=" deviceid='"
+    serieskeys= serieskeys + deviceid + "' "
+
+    query = ('select {}(apidata) AS apidata FROM {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by *, time({}s) ') \
+                .format(rollup,  measurement,  serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+
+
+
+    #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
+
+    
+    
+    log.info("get_apistat inFlux-cloud Query %s", query)
+    
+
+    try:
+      response= db.query(query)
+      
+    except InfluxDBClientError as e:
+      log.info('get_apistat: Exception Error in InfluxDB  %s:  ' % str(e))
+    except:
+      e = sys.exc_info()[0]
+      log.info('get_apistat: Error in geting inFluxDB data %s:  ' % e)
+        
+      return jsonify( message='Error in inFluxDB query 2', status='error')
+      #raise
+
+    
+    #return jsonify(results=response)
+    
+    #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
+    
+    #print 'inFluxDB read :', response.response.successful
+
+    
+    if not response:
+      #print 'inFluxDB Exception1:', response.response.successful, response.response.reason 
+      return jsonify( message='No response to return 1' , status='error')
+
+
+    #if not response.points:
+    #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
+    #  return jsonify( message='No data to return 2', status='error')
+
+    print('get_apistat processing data headers:')
+    jsondata=[]
+    jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    print('get_apistat start processing data points:')
+    log.info("get_apistat Get InfluxDB response %s", response)
+
+    keys = response.raw.get('series',[])
+    log.info("get_apistat Get InfluxDB series keys %s", keys)
+
+
+    callback = request.args.get('callback')
+    # use the last valid timestamp for the update
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+    return '{0}({1})'.format(callback, {'response':response})
+
+
+  except AttributeError as e:
+    #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+
+    log.info('get_apistat: AttributeError in freeboard_environmental %s:  ' % str(e))
+    
+  except TypeError as e:
+    log.info('get_apistat:  TypeError in freeboard_environmental point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: TypeError in freeboard_environmental %s:  ' % str(e))
+    
+  except ValueError as e:
+    log.info('get_apistat: ValueError in freeboard_environmental point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+
+    log.info('get_apistat: ValueError in freeboard_environmental point%s:  ' % str(e))            
+    
+  except NameError as e:
+    #log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: NameError in freeboard_environmental %s:  ' % str(e))           
+
+  except IndexError as e:
+    log.info('get_apistat: IndexError in freeboard_environmental point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: IndexError in freeboard_environmental %s:  ' % str(e))
+
+  except OverflowError as e:
+    log.info('get_apistat: OverflowError in freeboard_environmental point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: OverflowError in freeboard_environmental %s:  ' % str(e))
+
+    
+  #except pyonep.exceptions.JsonRPCRequestException as ex:
+  #    print('JsonRPCRequestException: {0}'.format(ex))
+      
+  #except pyonep.exceptions.JsonRPCResponseException as ex:
+  #    print('JsonRPCResponseException: {0}'.format(ex))
+      
+  #except pyonep.exceptions.OnePlatformException as ex:
+  #    print('OnePlatformException: {0}'.format(ex))
+     
+  except:
+      log.info('get_apistat: Error in  response %s:  ', deviceapikey)
+      e = sys.exc_info()[0]
+      log.info('get_apistat: Error in  apiststs %s:  ' % e)
+      #return jsonify(update=False, status='missing' )
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+  #return jsonify(status='error',  update=False )
+  callback = request.args.get('callback')
+  return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 
   
