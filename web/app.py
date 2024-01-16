@@ -1215,7 +1215,7 @@ def get_apistat():
     #return '{0}({1})'.format(callback, {'response':response})
 
 
-    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution, 'DeviceID':deviceid,'DeviceName':devicename,'total_api_values':int(total),'api_values':jsondata})
+    return '{0}({1})'.format(callback, { 'APIKey':deviceapikey, 'DeviceID':deviceid,'DeviceName':devicename, 'Email':useremail, 'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution,'total_api_values':int(total),'api_values':jsondata})
 
 
   except AttributeError as e:
