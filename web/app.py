@@ -1200,14 +1200,21 @@ def get_apistat():
     jsondata = sorted(jsondata,key=itemgetter('epoch'), reverse=True)
     log.info('get_apistat:  jsondata %s:  ', jsondata)
 
+    total = 0
 
+    for stat in jsondata:
+      if stat['value'] != None:
+        total = total + float(stat['value'])
 
 
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-    return '{0}({1})'.format(callback, {'response':response})
+    #return '{0}({1})'.format(callback, {'response':response})
+
+
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution, 'DeviceID':deviceid,'DeviceName':devicename,'total_api_values':int(total),'api_values':jsondata})
 
 
   except AttributeError as e:
