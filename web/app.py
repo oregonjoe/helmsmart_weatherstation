@@ -1190,7 +1190,7 @@ def get_apistat():
             ts = int((mydatetime.timestamp() + tzoffset) * 1000 )
             #log.info('freeboard_environmental:: ts %s:  ' % ts)
             
-            strvalue = {'epoch': ts,  'value': fields['apidata']}
+            strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
             jsondata.append(strvalue)
 
 
