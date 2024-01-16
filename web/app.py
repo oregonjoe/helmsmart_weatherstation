@@ -1084,7 +1084,7 @@ def get_apistat():
 
 
 
-    #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
+    query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
 
     
     
