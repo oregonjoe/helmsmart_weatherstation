@@ -571,6 +571,78 @@ def help():
 
 ### user functions #####
 
+### user functions #####
+def getuserinfo(deviceapikey):
+
+    conn = db_pool.getconn()
+
+    log.info("freeboard getuserinfo data Query %s", deviceapikey)
+    #query = "select deviceid from user_devices where deviceapikey = %s"
+
+    #query = ("select deviceid from user_devices where deviceapikey = '{}' ") \
+    #            .format(deviceapikey )
+
+
+    #log.info("freeboard getedeviceid Query %s", query)
+
+
+    try:
+    # first check db to see if deviceapikey is matched to device id
+
+        cursor = conn.cursor()
+        #cursor.execute(query, (deviceapikey,))
+        #cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        #key=('bfeba0c3c5244269b4c8d276872519a6',)
+        cursor.execute("select deviceid, useremail, devicename from user_devices where deviceapikey = %s" , (deviceapikey,))
+        #response= cursor.query(query)
+        i = cursor.fetchone()
+        log.info("freeboard getuserinfo response %s", i)            
+        # see we got any matches
+        if cursor.rowcount == 0:
+        #if not response:
+            # cursor.close
+            db_pool.putconn(conn) 
+            #return ""
+            #return json.dumps({'deviceid':'', 'useremail':'', 'devicename':''})
+            return {'deviceid':'', 'useremail':'', 'devicename':''}
+        
+        else:
+            deviceid = str(i[0])
+            useremail = str(i[1])
+            devicename = str(i[2])
+            db_pool.putconn(conn) 
+            #return deviceid
+            #return json.dumps({'deviceid':deviceid, 'useremail':useremail,'devicename':devicename})
+            return {'deviceid':deviceid, 'useremail':useremail,'devicename':devicename}
+
+    except TypeError as e:
+        log.info('freeboard: TypeError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: TypeError in getuserinfo   %s:  ' % str(e))
+            
+    except KeyError as e:
+        log.info('freeboard: KeyError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: KeyError in getuserinfo   %s:  ' % str(e))
+
+    except NameError as e:
+        log.info('freeboard: NameError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: NameError in getuserinfo   %s:  ' % str(e))
+            
+    except IndexError as e:
+        log.info('freeboard: IndexError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: IndexError in getuserinfo   %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: Error in geting  deviceid %s:  ', deviceapikey)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting deviceid  %s:  ' % str(e))
+
+    # cursor.close
+    db_pool.putconn(conn)                       
+
+    #return json.dumps({'deviceid':'', 'useremail':"", 'devicename':''})
+    return {'deviceid':'', 'useremail':"", 'devicename':''}
+
 def getedeviceid(deviceapikey):
 
     conn = db_pool.getconn()
