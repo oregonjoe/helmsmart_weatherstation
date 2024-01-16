@@ -1227,15 +1227,15 @@ def get_apistat():
       strvalue = strvalue + 'API tag , API values \r\n'
       
       list_length = len(jsondata)
-      for i in range(list_length-1):
+      for i in range(list_length):
 
         strvalue = strvalue + jsondata[i]['apitag'] + ', ' + str(jsondata[i]['value']) + ' \r\n'
 
-        strvalue = strvalue + 'Total API values = ' + str(total) + ' \r\n'
+      strvalue = strvalue + 'Total API values = ' + str(total) + ' \r\n'
 
       response = make_response(strvalue)
       response.headers['Content-Type'] = 'text/csv'
-      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPIlog"+ deviceapikey + ".csv"
+      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPILOG_"+ deviceapikey + ".csv"
       return response
       
 
