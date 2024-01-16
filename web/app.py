@@ -1190,14 +1190,15 @@ def get_apistat():
             ts = int((mydatetime.timestamp() + tzoffset) * 1000 )
             #log.info('freeboard_environmental:: ts %s:  ' % ts)
             
-            strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
+            #strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
+            strvalue = {'apitag': tag['apifunction']   ,  'value': fields['apidata']}
             jsondata.append(strvalue)
 
 
 
 
 
-    jsondata = sorted(jsondata,key=itemgetter('epoch'), reverse=True)
+    jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
     log.info('get_apistat:  jsondata %s:  ', jsondata)
 
     total = 0
