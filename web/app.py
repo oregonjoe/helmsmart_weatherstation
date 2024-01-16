@@ -1231,7 +1231,7 @@ def get_apistat():
 
         strvalue = strvalue + jsondata[i]['apitag'] + ', ' + jsondata[i]['apitag'] + ' \r\n'
 
-       strvalue = strvalue + 'Total API values = ' + total + ' \r\n'
+        strvalue = strvalue + 'Total API values = ' + total + ' \r\n'
 
       response = make_response(strvalue)
       response.headers['Content-Type'] = 'text/csv'
