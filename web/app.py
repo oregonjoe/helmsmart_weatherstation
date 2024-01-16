@@ -1222,7 +1222,7 @@ def get_apistat():
     elif dataformat == 'csv':
 
       #strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
-      strvalue ='APIkey:' + deviceapikey +, 'DeviceID:' + deviceid + ', DeviceName:' +devicename + ', Email:' + useremail + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + resolution  + ' \r\n'
+      strvalue ='APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' +devicename + ', Email:' + useremail + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + resolution  + ' \r\n'
 
       strvalue = strvalue + 'API tag , API values \r\n'
       
