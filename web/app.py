@@ -1222,16 +1222,16 @@ def get_apistat():
     elif dataformat == 'csv':
 
       #strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
-      strvalue ='APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' +devicename + ', Email:' + useremail + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + resolution  + ' \r\n'
+      strvalue ='APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' +devicename + ', Email:' + useremail + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
 
       strvalue = strvalue + 'API tag , API values \r\n'
       
       list_length = len(jsondata)
       for i in range(list_length-1):
 
-        strvalue = strvalue + jsondata[i]['apitag'] + ', ' + jsondata[i]['apitag'] + ' \r\n'
+        strvalue = strvalue + jsondata[i]['apitag'] + ', ' + str(jsondata[i]['value']) + ' \r\n'
 
-        strvalue = strvalue + 'Total API values = ' + total + ' \r\n'
+        strvalue = strvalue + 'Total API values = ' + str(total) + ' \r\n'
 
       response = make_response(strvalue)
       response.headers['Content-Type'] = 'text/csv'
