@@ -1076,8 +1076,8 @@ def get_apistat():
     serieskeys= serieskeys + deviceid + "' "
 
     #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,  serieskeys, startepoch, endepoch, resolution) 
-    query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,   startepoch, endepoch, resolution) 
-
+    #query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,   startepoch, endepoch, resolution) 
+    query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s, {}s) ').format(rollup,  measurement,   startepoch, endepoch, resolution, startepoch) 
 
     #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
     #query = ('select {}(apidata) AS apidata FROM {} where time > {}s and time < {}s ').format(rollup,  measurement,   startepoch, endepoch)
