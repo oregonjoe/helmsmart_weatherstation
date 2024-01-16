@@ -1072,16 +1072,16 @@ def get_apistat():
 
     #rollup = "mean"
 
-    #serieskeys=" deviceid='"
-    #serieskeys= serieskeys + deviceid + "' "
+    serieskeys=" deviceid='"
+    serieskeys= serieskeys + deviceid + "' "
 
-    serieskeys="apikey='"+ deviceapikey + "' "
+    #serieskeys="apikey='"+ deviceapikey + "' "
 
 
     #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,  serieskeys, startepoch, endepoch, resolution) 
     #query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,   startepoch, endepoch, resolution) 
     #query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s, {}s ) ').format(rollup,  measurement,   startepoch, endepoch, resolution, startepoch) 
-    query = ('select {}(apidata) AS apidata FROM {} where {} AND   time > {}s and time < {}s group by *, time({}s, {}s ) ').format(rollup,  measurement, serieskeys,  startepoch, endepoch, resolution, startepoch) 
+    query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s, {}s ) ').format(rollup,  measurement, serieskeys,  startepoch, endepoch, resolution, startepoch) 
 
     #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
     #query = ('select {}(apidata) AS apidata FROM {} where time > {}s and time < {}s ').format(rollup,  measurement,   startepoch, endepoch)
