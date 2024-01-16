@@ -971,6 +971,8 @@ def get_apistat():
 
   resolution = request.args.get('resolution',"")
   mytimezone = request.args.get('timezone',"UTC")
+  mytimezone = request.args.get('timezone',"UTC")
+  dataformat = request.args.get('format', 'json')
   response = None
 
 
@@ -1214,9 +1216,28 @@ def get_apistat():
 
     #return '{0}({1})'.format(callback, {'response':response})
 
+    if dataformat == 'json':
+      return '{0}({1})'.format(callback, { 'APIkey':deviceapikey, 'DeviceID':deviceid,'DeviceName':devicename, 'Email':useremail, 'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution,'total_api_values':int(total),'api_values':jsondata})
 
-    return '{0}({1})'.format(callback, { 'APIKey':deviceapikey, 'DeviceID':deviceid,'DeviceName':devicename, 'Email':useremail, 'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution,'total_api_values':int(total),'api_values':jsondata})
+    else if dataformat == 'csv':
 
+      #strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
+      strvalue ='APIkey:' + deviceapikey +, 'DeviceID:' + deviceid + ', DeviceName:' +devicename + ', Email:' + useremail + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + resolution  + ' \r\n'
+
+      strvalue = strvalue + 'API tag , API values \r\n'
+      
+      list_length = len(jsondata)
+      for i in range(list_length-1):
+
+        strvalue = strvalue + jsondata[i]['apitag'] + ', ' + jsondata[i]['apitag'] + ' \r\n'
+
+       strvalue = strvalue + 'Total API values = ' + total + ' \r\n'
+
+      response = make_response(strvalue)
+      response.headers['Content-Type'] = 'text/csv'
+      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPIlog"+ deviceapikey + ".csv"
+      return response
+      
 
   except AttributeError as e:
     #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
