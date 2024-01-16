@@ -1219,7 +1219,7 @@ def get_apistat():
     if dataformat == 'json':
       return '{0}({1})'.format(callback, { 'APIkey':deviceapikey, 'DeviceID':deviceid,'DeviceName':devicename, 'Email':useremail, 'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution,'total_api_values':int(total),'api_values':jsondata})
 
-    else if dataformat == 'csv':
+    elif dataformat == 'csv':
 
       #strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
       strvalue ='APIkey:' + deviceapikey +, 'DeviceID:' + deviceid + ', DeviceName:' +devicename + ', Email:' + useremail + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + resolution  + ' \r\n'
