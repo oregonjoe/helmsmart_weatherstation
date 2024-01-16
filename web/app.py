@@ -1214,7 +1214,7 @@ def get_apistat():
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-    myfiledate = mydatetime.strftime('%m%d%Y%H%M%S')
+    myfiledate = mydatetime.strftime('%Y%m%d%H%M%S')
 
     #return '{0}({1})'.format(callback, {'response':response})
 
@@ -1329,28 +1329,13 @@ def get_apistat_all():
   if resolution == "":
     resolution = epochtimes[2]
 
-  
-  userdata = getuserinfo(deviceapikey)
-  log.info("freeboard get_apistat_all userdata %s", userdata)
-  
-  useremail = userdata.get('useremail',"")
-  log.info("freeboard get_apistat_all useremail %s", useremail)
 
-
-  deviceid = userdata.get('deviceid',"")
-  
-  log.info("freeboard get_apistat_all deviceid %s", deviceid)
-
-  if deviceid == "":
-      callback = request.args.get('callback')
-      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
   measurement = "HelmSmart"
   measurement = 'HS_' + str(deviceid)
 
 
-  devicename = userdata.get('devicename',"")
-  log.info("freeboard get_apistat_all devicename %s", devicename)  
+
 
   response = None
   
@@ -1462,11 +1447,51 @@ def get_apistat_all():
     log.info("get_apistat_all Get InfluxDB series keys %s", keys)
 
 
+    strvalue=""
+    
+    for series in keys:
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+      #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+      #log.info("freeboard Get InfluxDB series values %s ", series['values'])
+
+      """        
+      values = series['values']
+      for value in values:
+        log.info("freeboard Get InfluxDB series time %s", value[0])
+        log.info("freeboard Get InfluxDB series mean %s", value[1])
+      """
+
+      tag = series['tags']
+      log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+
+      #mydatetimestr = str(fields['time'])
+      strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
+      jsonkey.append(strvaluekey)        
+
+      #log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
+      # initialize datetime to default
+      mydatetime = datetime.datetime.now()
+      
+      for point in series['values']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
+          
+        #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+
+        if fields['apidata'] != None:
+            strvalue = {'apikey':tag['apikey'],  'apifunction':tag['apifunction'], 'value': fields['apidata']}
+            jsondata.append(strvalue)
+
+    jsondata = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
+
+
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-    return '{0}({1})'.format(callback, {'response':response})
+    return '{0}({1})'.format(callback, {'response':jsondata})
 
 
   except AttributeError as e:
