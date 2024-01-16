@@ -1331,8 +1331,8 @@ def get_apistat_all():
 
 
 
-  measurement = "HelmSmart"
-  measurement = 'HS_' + str(deviceid)
+  #measurement = "HelmSmart"
+  #measurement = 'HS_' + str(deviceid)
 
 
 
