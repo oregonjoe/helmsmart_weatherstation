@@ -1543,7 +1543,7 @@ def get_apistat_all():
       
       if elem['useremail'] not in jsondatagrouped:
         jsondatagrouped[elem['useremail']] = dict()
-        strvalue = strvalue + "\r\n" + [elem['useremail']] + ", , ,"
+        strvalue = strvalue + "\r\n" + elem['useremail'] + ", , ,"
 
         
       if elem['apikey'] in jsondatagrouped[elem['useremail']]:
@@ -1562,7 +1562,7 @@ def get_apistat_all():
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads(jsonvaluestr)
         jsondatagrouped[elem['useremail']][ elem['apikey']]=[jsonvaluestr]
 
-        strvalue = strvalue + '\r\n , ,' + [elem['apikey'] + ',' +  elem['deviceid'] + ',' + elem['devicename'] + '\r\n'
+        strvalue = strvalue + '\r\n , ,' + elem['apikey'] + ',' +  elem['deviceid'] + ',' + elem['devicename'] + '\r\n'
         strvalue = strvalue + ', , , ' +  + elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads("{ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}")
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
