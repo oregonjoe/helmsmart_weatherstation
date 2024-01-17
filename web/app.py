@@ -12,7 +12,7 @@ import json
 import hashlib
 import base64
 from operator import itemgetter
-
+from itertools import groupby
    
 import requests
 from requests.exceptions import HTTPError
@@ -1484,14 +1484,18 @@ def get_apistat_all():
             strvalue = {'apikey':tag['apikey'],  'apifunction':tag['apifunction'], 'value': fields['apidata']}
             jsondata.append(strvalue)
 
-    jsondata = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
+    jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
+
+    grouper = groupby(jsondatasorted, key=itemgetter(0))
+    jsondatagrouped = {i: list(map(itemgetter(1), j)) for i, j in grouper}
+
 
 
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-    return '{0}({1})'.format(callback, {'response':jsondata})
+    return '{0}({1})'.format(callback, {'response':jsondatagrouped})
 
 
   except AttributeError as e:
