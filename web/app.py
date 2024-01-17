@@ -1485,10 +1485,12 @@ def get_apistat_all():
             jsondata.append(strvalue)
 
     jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
-
-    grouper = groupby(jsondatasorted, key=itemgetter('apikey'))
+    log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
+    
+    grouper = groupby(jsondatasorted, key=itemgetter(0))
+    
     jsondatagrouped = {i: list(map(itemgetter(1), j)) for i, j in grouper}
-
+    log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
 
     callback = request.args.get('callback')
@@ -1519,7 +1521,7 @@ def get_apistat_all():
     log.info('get_apistat: KeyError in get_apistat_all point %s:  ', deviceapikey)
     #e = sys.exc_info()[0]
 
-    log.info('get_apistat: ValueError in get_apistat_all point%s:  ' % str(e))    
+    log.info('get_apistat: KeyError in get_apistat_all point%s:  ' % str(e))    
     
   except NameError as e:
     #log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
