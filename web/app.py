@@ -1543,7 +1543,7 @@ def get_apistat_all():
       
       if elem['useremail'] not in jsondatagrouped:
         jsondatagrouped[elem['useremail']] = dict()
-        strvalue = strvalue + '\r\n' + [elem['useremail'] + ', , ,'
+        strvalue = strvalue + "\r\n" + [elem['useremail']] + ", , ,"
 
         
       if elem['apikey'] in jsondatagrouped[elem['useremail']]:
