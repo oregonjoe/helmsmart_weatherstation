@@ -1533,12 +1533,19 @@ def get_apistat_all():
     #  log.info('get_apistat:  jsondatagrouped  elem  %s:  ', elem)
 
     """
+    #strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
+
+    strvalue =""
+
+    
     jsondatagrouped = dict()
     for elem in jsondatasorted:
       
       if elem['useremail'] not in jsondatagrouped:
         jsondatagrouped[elem['useremail']] = dict()
+        strvalue = strvalue + '\r\n' + [elem['useremail'] + ', , ,'
 
+        
       if elem['apikey'] in jsondatagrouped[elem['useremail']]:
         #jsondatagrouped[elem['useremail']][ elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
 
@@ -1546,18 +1553,23 @@ def get_apistat_all():
         jsonvaluestr = '{ "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
         #jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['apifunction'])
         jsondatagrouped[elem['useremail']][ elem['apikey']].append([jsonvaluestr])
+        strvalue = strvalue + ', , , ' +  +elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
+                                        
                         
       else:
         jsonvaluestr = '{ "deviceid":"' + elem['deviceid'] + '","devicename":"' + elem['devicename'] + '",  "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
         log.info('get_apistat:  jsonvaluestr %s:  ', jsonvaluestr)
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads(jsonvaluestr)
         jsondatagrouped[elem['useremail']][ elem['apikey']]=[jsonvaluestr]
+
+        strvalue = strvalue + '\r\n , ,' + [elem['apikey'] + ',' +  elem['deviceid'] + ',' + elem['devicename'] + '\r\n'
+        strvalue = strvalue + ', , , ' +  + elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads("{ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}")
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
 
     
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
-
+    log.info('get_apistat:  strvalue %s:  ', strvalue)
     """
     final_dict = {'researchSubTypeToResolutionCodes': []}
     for researchSubTypeCode, dic in jsondatagrouped.items():
