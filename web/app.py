@@ -1442,10 +1442,10 @@ def get_apistat_all():
     #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
     #jsonkey.append(strvaluekey)
     print('get_apistat_all start processing data points:')
-    log.info("get_apistat_all Get InfluxDB response %s", response)
+    #log.info("get_apistat_all Get InfluxDB response %s", response)
 
     keys = response.raw.get('series',[])
-    log.info("get_apistat_all Get InfluxDB series keys %s", keys)
+    #log.info("get_apistat_all Get InfluxDB series keys %s", keys)
 
 
     strvalue=""
@@ -1464,7 +1464,7 @@ def get_apistat_all():
       """
 
       tag = series['tags']
-      log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+      #log.info("freeboard Get InfluxDB series tags2 %s ", tag)
 
       #mydatetimestr = str(fields['time'])
       strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
@@ -1487,7 +1487,7 @@ def get_apistat_all():
 
     #jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
     jsondatasorted = sorted(jsondata,key=itemgetter('useremail', 'apikey'), reverse=True)
-    log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
+    #log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
     
     """
     jsondatagrouped = {}
@@ -1559,7 +1559,7 @@ def get_apistat_all():
                         
       else:
         jsonvaluestr = '{ "deviceid":"' + elem['deviceid'] + '","devicename":"' + elem['devicename'] + '",  "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
-        log.info('get_apistat:  jsonvaluestr %s:  ', jsonvaluestr)
+        #log.info('get_apistat:  jsonvaluestr %s:  ', jsonvaluestr)
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads(jsonvaluestr)
         jsondatagrouped[elem['useremail']][ elem['apikey']]=[jsonvaluestr]
 
@@ -1570,7 +1570,7 @@ def get_apistat_all():
 
     
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
-    log.info('get_apistat:  strvalue %s:  ', strvalue)
+    #log.info('get_apistat:  strvalue %s:  ', strvalue)
     """
     final_dict = {'researchSubTypeToResolutionCodes': []}
     for researchSubTypeCode, dic in jsondatagrouped.items():
@@ -1589,9 +1589,9 @@ def get_apistat_all():
 
         
     #from pprint import pprint
-    pprint(final_dict)
+    #pprint(final_dict)
     
-    log.info('get_apistat:  final_dict %s:  ' , json.dumps( final_dict))
+    #log.info('get_apistat:  final_dict %s:  ' , json.dumps( final_dict))
     #strvalue = ""
 
     """    
@@ -1606,7 +1606,7 @@ def get_apistat_all():
       log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['apikey'],  apitags['deviceid'],  apitags['devicename'],  )         
       log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)
 
-    """
+
 
  
     for key in jsondatagrouped:
@@ -1629,6 +1629,8 @@ def get_apistat_all():
       #strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
 
     #log.info('get_apistat:  jsondatasorted strvalue%s:  ', strvalue)
+    """
+
     
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
