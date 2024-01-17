@@ -7,6 +7,7 @@ from os import environ as env, path
 import pylibmc  
 import sys
 import json
+from pprint import pprint
 
 #import md5
 import hashlib
@@ -1564,6 +1565,9 @@ def get_apistat_all():
         temp_dic = {'researchSubTypeCode': researchSubTypeCode, 'resolutionTypes': temp_list}
         final_dict['researchSubTypeToResolutionCodes'].append(temp_dic)
 
+    #from pprint import pprint
+    pprint(final_dict)
+    
     log.info('get_apistat:  final_dict %s:  ', final_dict)
     strvalue = ""
 
@@ -1591,8 +1595,8 @@ def get_apistat_all():
         #log.info('get_apistat:  jsondatasorted apifunction %s: %s ', apitags['apifunction'], apitags['apidata'] )
         log.info('get_apistat:  jsondatasorted apitags %s: ', apitags )
         
-        for apikeys in apitags:
-          log.info('get_apistat:  jsondatasorted json apitags %s: ', apikeys)
+        #for apikeys in apitags:
+        #  log.info('get_apistat:  jsondatasorted json apitags %s: ', apikeys)
         #log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['apikey'],  apitags['deviceid'],  apitags['devicename'],  )         
       #log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)
   
