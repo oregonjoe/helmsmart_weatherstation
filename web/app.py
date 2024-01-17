@@ -1516,10 +1516,10 @@ def get_apistat_all():
                          
       jsondataapikey[elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
       log.info('get_apistat:  jsondataapikey %s:  ', jsondataapikey) 
+
       #jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
-      jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
     
-    log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
+      log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
     #for elem in jsondatagrouped:
     #  log.info('get_apistat:  jsondatagrouped  elem  %s:  ', elem)
@@ -1527,7 +1527,8 @@ def get_apistat_all():
 
 
     strvalue = ""
-    
+
+    """    
     for key in jsondatagrouped:
       log.info('get_apistat:  jsondatasorted email %s: ', key)
       apivalues = jsondatagrouped[key]
@@ -1537,7 +1538,9 @@ def get_apistat_all():
         log.info('get_apistat:  jsondatasorted apifunction %s: %s ', apitags['apifunction'], apitags['apidata'] )
 
       log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['apikey'],  apitags['deviceid'],  apitags['devicename'],  )         
-      log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)  
+      log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)
+
+    """      
     #list_length = len(jsondatagrouped)
     #for i in range(list_length):
 
