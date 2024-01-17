@@ -1558,13 +1558,23 @@ def get_apistat_all():
     
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
-
+    """
     final_dict = {'researchSubTypeToResolutionCodes': []}
     for researchSubTypeCode, dic in jsondatagrouped.items():
         temp_list = [{'resolutionCode': key, 'resolutionSubTypeCodes': val} for key, val in dic.items()]
         temp_dic = {'researchSubTypeCode': researchSubTypeCode, 'resolutionTypes': temp_list}
         final_dict['researchSubTypeToResolutionCodes'].append(temp_dic)
 
+    """
+
+    
+    final_dict = {'HelmSmartAPIlogs': []}
+    for apiemail, dic in jsondatagrouped.items():
+        temp_list = [{'apikey': key, 'apivalues': val} for key, val in dic.items()]
+        temp_dic = {'apiemail': apiemail, 'apikeys': temp_list}
+        final_dict['HelmSmartAPIlogs'].append(temp_dic)
+
+        
     #from pprint import pprint
     pprint(final_dict)
     
