@@ -1484,15 +1484,17 @@ def get_apistat_all():
             strvalue = {'apikey':tag['apikey'],  'deviceid':tag['deviceid'],    'devicename':tag['devicename'],      'useremail':tag['useremail'],    'apifunction':tag['apifunction'], 'value': fields['apidata']}
             jsondata.append(strvalue)
 
-    jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
+    #jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
+    jsondatasorted = sorted(jsondata,key=itemgetter('useremail', 'apikey'), reverse=True)
     log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
     
 
     jsondatagrouped = {}
     for elem in jsondatasorted:
-      if elem['apikey'] not in jsondatagrouped:
-        jsondatagrouped[elem['apikey']] = []
-      jsondatagrouped[elem['apikey']].append({'deviceid':elem['deviceid'],'devicename':elem['devicename'], 'useremail':elem['useremail'], 'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      if elem['useremail'] not in jsondatagrouped:
+        jsondatagrouped[elem['useremail']] = []
+      #jsondatagrouped[elem['apikey']].append({'deviceid':elem['deviceid'],'devicename':elem['devicename'], 'useremail':elem['useremail'], 'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
 
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
