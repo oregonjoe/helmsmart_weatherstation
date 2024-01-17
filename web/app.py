@@ -1488,6 +1488,7 @@ def get_apistat_all():
     log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
     
     grouper = groupby(jsondatasorted, key=itemgetter(0))
+    log.info('get_apistat:  grouper %s:  ', grouper)
     
     jsondatagrouped = {i: list(map(itemgetter(1), j)) for i, j in grouper}
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
