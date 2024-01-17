@@ -1496,13 +1496,15 @@ def get_apistat_all():
 
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
     
+    for key in jsondatagrouped:
+      log.info('get_apistat:  jsondatasorted strvalue%s:  ', key) 
+        
+    #list_length = len(jsondatagrouped)
+    #for i in range(list_length):
 
-    list_length = len(jsondatagrouped)
-    for i in range(list_length):
+      #strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
 
-      strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
-
-    log.info('get_apistat:  jsondatasorted strvalue%s:  ', strvalue)
+    #log.info('get_apistat:  jsondatasorted strvalue%s:  ', strvalue)
     
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
