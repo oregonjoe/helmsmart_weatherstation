@@ -1553,7 +1553,7 @@ def get_apistat_all():
         jsonvaluestr = '{ "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
         #jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['apifunction'])
         jsondatagrouped[elem['useremail']][ elem['apikey']].append([jsonvaluestr])
-        strvalue = strvalue + ', , , ' +  +elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
+        strvalue = strvalue + ', , , ' +  elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
                                         
                         
       else:
@@ -1563,7 +1563,7 @@ def get_apistat_all():
         jsondatagrouped[elem['useremail']][ elem['apikey']]=[jsonvaluestr]
 
         strvalue = strvalue + '\r\n , ,' + elem['apikey'] + ',' +  elem['deviceid'] + ',' + elem['devicename'] + '\r\n'
-        strvalue = strvalue + ', , , ' +  + elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
+        strvalue = strvalue + ', , , ' +   elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads("{ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}")
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
 
