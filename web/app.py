@@ -1492,7 +1492,7 @@ def get_apistat_all():
     for elem in jsondatasorted:
       if elem['apikey'] not in jsondatagrouped:
         jsondatagrouped[elem['apikey']] = []
-      jsondatagrouped[elem['apikey']].append({'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      jsondatagrouped[elem['apikey']].append({'deviceid':elem['deviceid'],'devicename':elem['devicename'], 'useremail':elem['useremail'], 'apifunction':elem['apifunction'],'apidata':elem['value']} )
 
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
