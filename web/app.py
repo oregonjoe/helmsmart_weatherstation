@@ -1494,10 +1494,13 @@ def get_apistat_all():
         jsondatagrouped[elem['apikey']] = []
       jsondatagrouped[elem['apikey']].append({'apifunction':elem['apifunction'],'apidata':elem['value']} )
 
+    log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
+    
+
     list_length = len(jsondatagrouped)
     for i in range(list_length):
 
-      strvalue = strvalue + jsondatagrouped[i]['apitag'] + ', ' + str(jsondatagrouped[i]['value']) + ' \r\n'
+      strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
 
     log.info('get_apistat:  jsondatasorted strvalue%s:  ', strvalue)
     
