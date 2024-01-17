@@ -1574,7 +1574,7 @@ def get_apistat_all():
 
   except KeyError as e:
     log.info('get_apistat: KeyError in get_apistat_all point %s:  ', deviceapikey)
-    #e = sys.exc_info()[0]
+    e = sys.exc_info()[0]
 
     log.info('get_apistat: KeyError in get_apistat_all point%s:  ' % str(e))    
     
