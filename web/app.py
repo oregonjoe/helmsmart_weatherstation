@@ -1481,7 +1481,7 @@ def get_apistat_all():
         #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
 
         if fields['apidata'] != None:
-            strvalue = {'apikey':tag['apikey'],  'apifunction':tag['apifunction'], 'value': fields['apidata']}
+            strvalue = {'apikey':tag['apikey'],  'deviceid':tag['deviceid'],    'devicename':tag['devicename'],      'useremail':tag['useremail'],    'apifunction':tag['apifunction'], 'value': fields['apidata']}
             jsondata.append(strvalue)
 
     jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
@@ -1495,6 +1495,9 @@ def get_apistat_all():
       jsondatagrouped[elem['apikey']].append({'apifunction':elem['apifunction'],'apidata':elem['value']} )
 
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
+
+
+    strvalue = ""
     
     for key in jsondatagrouped:
       log.info('get_apistat:  jsondatasorted strvalue %s: ', key)
