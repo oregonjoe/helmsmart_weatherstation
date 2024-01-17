@@ -1515,7 +1515,7 @@ def get_apistat_all():
       if elem['apikey'] not in jsondataapikey:
         jsondataapikey[elem['apikey']]= []
           
-      log.info('get_apistat:  jsondataapikey1 %s:  ', jsondataapikey)                          
+      #log.info('get_apistat:  jsondataapikey1 %s:  ', jsondataapikey)                          
       jsondataapikey[elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
       log.info('get_apistat:  jsondataapikey2 %s:  ', jsondataapikey) 
 
