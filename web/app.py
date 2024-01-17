@@ -1507,7 +1507,7 @@ def get_apistat_all():
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
     for elem in jsondatagrouped:
-      log.info('get_apistat:  jsondatagrouped  elem%s:  ', elem)
+      log.info('get_apistat:  jsondatagrouped  elem  %s:%s  ', elem, elem['apikey'])
 
     strvalue = ""
     
