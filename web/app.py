@@ -1497,7 +1497,10 @@ def get_apistat_all():
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
     
     for key in jsondatagrouped:
-      log.info('get_apistat:  jsondatasorted strvalue %s: %s ', key, jsondatagrouped[key] ) 
+      log.info('get_apistat:  jsondatasorted strvalue %s: ', key)
+      apivalues = jsondatagrouped[key]
+      for apitags in apivalues:
+        log.info('get_apistat:  jsondatasorted apifunction %s: %s ', apitags['apifunction'], apitags['apidata'] )
         
     #list_length = len(jsondatagrouped)
     #for i in range(list_length):
