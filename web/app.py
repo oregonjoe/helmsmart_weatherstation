@@ -1632,9 +1632,13 @@ def get_apistat_all():
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-
-    return '{0}({1})'.format(callback, {'response':jsondatagrouped})
-
+    myfiledate = mydatetime.strftime('%Y%m%d%H%M%S')
+    
+    #return '{0}({1})'.format(callback, {'response':jsondatagrouped})
+    response = make_response(strvalue)
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPISummaryLog_"+ myfiledate + ".csv"
+    return response
 
   except AttributeError as e:
     #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
