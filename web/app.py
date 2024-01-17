@@ -1517,10 +1517,10 @@ def get_apistat_all():
           
       #log.info('get_apistat:  jsondataapikey1 %s:  ', jsondataapikey)                          
       jsondataapikey[elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
-      #log.info('get_apistat:  jsondataapikey2 %s:  ', jsondataapikey) 
+      log.info('get_apistat:  jsondataapikey2 %s:  ', jsondataapikey) 
 
       #jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
-      jsondatagrouped[elem['useremail']].append(jsondataapikey[elem['apikey']])    
+      #jsondatagrouped[elem['useremail']].append(jsondataapikey[elem['apikey']])    
       log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
     #for elem in jsondatagrouped:
