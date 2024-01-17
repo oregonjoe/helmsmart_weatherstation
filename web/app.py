@@ -1532,19 +1532,19 @@ def get_apistat_all():
     #  log.info('get_apistat:  jsondatagrouped  elem  %s:  ', elem)
 
     """
-    jsondatagrouped = dict()
+    jsondatagrouped = []
     for elem in jsondatasorted:
       
       if elem['useremail'] not in jsondatagrouped:
-        jsondatagrouped[elem['useremail']] = dict()
+        jsondatagrouped[elem['useremail']] = []
 
       if elem['apikey'] in jsondatagrouped[elem['useremail']]:
         #jsondatagrouped[elem['useremail']][ elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
-        jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['deviceid'],elem['devicename'] )
+        jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['deviceid'])
                         
       else:
          #jsondatagrouped[elem['useremail']][ elem['apikey']]={ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}
-         jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['deviceid'],elem['devicename']]
+         jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['deviceid']]
 
     
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
