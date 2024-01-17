@@ -1514,8 +1514,8 @@ def get_apistat_all():
         if elem['apikey'] not in jsondataapikey:
           jsondataapikey[elem['apikey']]= []
                          
-        jsondataapikey[elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
-        log.info('get_apistat:  jsondataapikey %s:  ', jsondataapikey) 
+      jsondataapikey[elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      log.info('get_apistat:  jsondataapikey %s:  ', jsondataapikey) 
       #jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
       jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
     
