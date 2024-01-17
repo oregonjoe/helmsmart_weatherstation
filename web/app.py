@@ -1532,11 +1532,11 @@ def get_apistat_all():
     #  log.info('get_apistat:  jsondatagrouped  elem  %s:  ', elem)
 
     """
-    jsondatagrouped = []
+    jsondatagrouped = dict()
     for elem in jsondatasorted:
       
       if elem['useremail'] not in jsondatagrouped:
-        jsondatagrouped[elem['useremail']] = []
+        jsondatagrouped[elem['useremail']] = dict()
 
       if elem['apikey'] in jsondatagrouped[elem['useremail']]:
         #jsondatagrouped[elem['useremail']][ elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
@@ -1557,6 +1557,14 @@ def get_apistat_all():
     
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
+
+    final_dict = {'researchSubTypeToResolutionCodes': []}
+    for researchSubTypeCode, dic in jsondatagrouped.items():
+        temp_list = [{'resolutionCode': key, 'resolutionSubTypeCodes': val} for key, val in dic.items()]
+        temp_dic = {'researchSubTypeCode': researchSubTypeCode, 'resolutionTypes': temp_list}
+        final_dict['researchSubTypeToResolutionCodes'].append(temp_dic)
+
+    log.info('get_apistat:  final_dict %s:  ', final_dict)
     strvalue = ""
 
     """    
