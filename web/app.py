@@ -1492,7 +1492,7 @@ def get_apistat_all():
     for elem in jsondatasorted:
       if elem['apikey'] not in jsondatagrouped:
         jsondatagrouped[elem['apikey']] = []
-      jsondatagrouped[elem['apikey']].append(elem['apifunction'])
+      jsondatagrouped[elem['apikey']].append({'apifunction':elem['apifunction'],'apidata':elem['apidata']} )
 
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
