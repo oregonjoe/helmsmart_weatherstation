@@ -1582,8 +1582,9 @@ def get_apistat_all():
         #apitotals = apitotals + int(apitags['apidata'] )
         #log.info('get_apistat:  jsondatasorted apifunction %s: %s ', apitags['apifunction'], apitags['apidata'] )
         log.info('get_apistat:  jsondatasorted apitags %s: ', apitags )
-
-        log.info('get_apistat:  jsondatasorted json apitags %s: ', json.loads(apitags) )
+        
+        for apikeys in apitags:
+          log.info('get_apistat:  jsondatasorted json apitags %s: ', apikeys)
         #log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['apikey'],  apitags['deviceid'],  apitags['devicename'],  )         
       #log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)
   
