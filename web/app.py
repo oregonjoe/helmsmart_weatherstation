@@ -1534,9 +1534,10 @@ def get_apistat_all():
 
     """
     #strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
-
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
     strvalue =""
-
+    strvalue =' date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
+    strvalue ='User email, APIkey, DeviceID, Device Name, APIfunction, APIpayload  \r\n'
     
     jsondatagrouped = dict()
     for elem in jsondatasorted:
@@ -1591,7 +1592,7 @@ def get_apistat_all():
     pprint(final_dict)
     
     log.info('get_apistat:  final_dict %s:  ', final_dict)
-    strvalue = ""
+    #strvalue = ""
 
     """    
     for key in jsondatagrouped:
