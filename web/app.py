@@ -1488,7 +1488,15 @@ def get_apistat_all():
     jsondatasorted = sorted(jsondata,key=itemgetter('useremail', 'apikey'), reverse=True)
     log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
     
+    """
+    jsondatagrouped = {}
+    for elem in jsondatasorted:
+      if elem['useremail'] not in jsondatagrouped:
+        jsondatagrouped[elem['useremail']] = []
+      #jsondatagrouped[elem['apikey']].append({'deviceid':elem['deviceid'],'devicename':elem['devicename'], 'useremail':elem['useremail'], 'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
 
+    """
     jsondatagrouped = {}
     for elem in jsondatasorted:
       if elem['useremail'] not in jsondatagrouped:
@@ -1498,6 +1506,8 @@ def get_apistat_all():
 
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
+    for elem in jsondatagrouped:
+      log.info('get_apistat:  jsondatagrouped  elem%s:  ', elem)
 
     strvalue = ""
     
