@@ -1502,14 +1502,14 @@ def get_apistat_all():
     strvalue = ""
     
     for key in jsondatagrouped:
-      log.info('get_apistat:  jsondatasorted strvalue %s: ', key)
+      log.info('get_apistat:  jsondatasorted email %s: ', key)
       apivalues = jsondatagrouped[key]
       apitotals = 0
       for apitags in apivalues:
         apitotals = apitotals + int(apitags['apidata'] )
         log.info('get_apistat:  jsondatasorted apifunction %s: %s ', apitags['apifunction'], apitags['apidata'] )
 
-      log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['deviceid'],  apitags['devicename'],  apitags['useremail'])         
+      log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['apikey'],  apitags['deviceid'],  apitags['devicename'],  )         
       log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)  
     #list_length = len(jsondatagrouped)
     #for i in range(list_length):
