@@ -1540,7 +1540,10 @@ def get_apistat_all():
 
       if elem['apikey'] in jsondatagrouped[elem['useremail']]:
         #jsondatagrouped[elem['useremail']][ elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
-        jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['apifunction'])
+
+        jsonvaluestr = '{ "deviceid":"' + elem['deviceid'] + '","devicename":"' + elem['devicename'] + '",  "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
+        #jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['apifunction'])
+        jsondatagrouped[elem['useremail']][ elem['apikey']].append([jsonvaluestr])
                         
       else:
         jsonvaluestr = '{ "deviceid":"' + elem['deviceid'] + '","devicename":"' + elem['devicename'] + '",  "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
