@@ -1513,9 +1513,10 @@ def get_apistat_all():
         jsondatagrouped[elem['useremail']] = []
         if elem['apikey'] not in jsondataapikey:
           jsondataapikey[elem['apikey']]= []
-                         
+          
+      log.info('get_apistat:  jsondataapikey1 %s:  ', jsondataapikey)                          
       jsondataapikey[elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
-      log.info('get_apistat:  jsondataapikey %s:  ', jsondataapikey) 
+      log.info('get_apistat:  jsondataapikey2 %s:  ', jsondataapikey) 
 
       #jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
     
@@ -1574,7 +1575,7 @@ def get_apistat_all():
 
   except KeyError as e:
     log.info('get_apistat: KeyError in get_apistat_all point %s:  ', deviceapikey)
-    e = sys.exc_info()[0]
+    #e = sys.exc_info()[0]
 
     log.info('get_apistat: KeyError in get_apistat_all point%s:  ' % str(e))    
     
