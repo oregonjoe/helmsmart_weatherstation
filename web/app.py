@@ -1537,7 +1537,7 @@ def get_apistat_all():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
     strvalue =""
     strvalue =' date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
-    strvalue ='User email, APIkey, DeviceID, Device Name, APIfunction, APIpayload  \r\n'
+    strvalue =strvalue  + 'User email, APIkey, DeviceID, Device Name, APIfunction, APIpayload  \r\n'
     
     jsondatagrouped = dict()
     for elem in jsondatasorted:
@@ -1554,7 +1554,7 @@ def get_apistat_all():
         jsonvaluestr = '{ "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
         #jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['apifunction'])
         jsondatagrouped[elem['useremail']][ elem['apikey']].append([jsonvaluestr])
-        strvalue = strvalue + ', , , ' +  elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
+        strvalue = strvalue + ', ,, , ' +  elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
                                         
                         
       else:
@@ -1563,8 +1563,8 @@ def get_apistat_all():
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads(jsonvaluestr)
         jsondatagrouped[elem['useremail']][ elem['apikey']]=[jsonvaluestr]
 
-        strvalue = strvalue + '\r\n , ,' + elem['apikey'] + ',' +  elem['deviceid'] + ',' + elem['devicename'] + '\r\n'
-        strvalue = strvalue + ', , , ' +   elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
+        strvalue = strvalue + '\r\n , ' + elem['apikey'] + ',' +  elem['deviceid'] + ',' + elem['devicename'] + '\r\n'
+        strvalue = strvalue + ', ,, , ' +   elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads("{ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}")
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
 
@@ -1591,7 +1591,7 @@ def get_apistat_all():
     #from pprint import pprint
     pprint(final_dict)
     
-    log.info('get_apistat:  final_dict %s:  ', final_dict)
+    log.info('get_apistat:  final_dict %s:  ' , json.dumps( final_dict))
     #strvalue = ""
 
     """    
