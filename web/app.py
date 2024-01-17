@@ -1549,7 +1549,7 @@ def get_apistat_all():
         jsonvaluestr = '{ "deviceid":"' + elem['deviceid'] + '","devicename":"' + elem['devicename'] + '",  "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
         log.info('get_apistat:  jsonvaluestr %s:  ', jsonvaluestr)
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads(jsonvaluestr)
-        jsondatagrouped[elem['useremail']][ elem['apikey']]=[jsonvaluestr]
+        jsondatagrouped[elem['useremail']][ elem['apikey']].append[jsonvaluestr]
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads("{ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}")
         #jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
 
