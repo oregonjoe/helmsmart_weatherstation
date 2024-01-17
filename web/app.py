@@ -1543,8 +1543,8 @@ def get_apistat_all():
         jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['apifunction'])
                         
       else:
-         #jsondatagrouped[elem['useremail']][ elem['apikey']]={ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}
-         jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
+         jsondatagrouped[elem['useremail']][ elem['apikey']]=jsonloads({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']})
+         #jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
 
     
     log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
