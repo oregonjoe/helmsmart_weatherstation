@@ -1487,12 +1487,12 @@ def get_apistat_all():
     jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
     log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
     
-    grouper = groupby(jsondatasorted, key=itemgetter(0))
-    log.info('get_apistat:  grouper %s:  ', grouper)
-    
-    jsondatagrouped = {i: list(map(itemgetter(1), j)) for i, j in grouper}
-    log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
 
+    jsondatagrouped = {}
+    for elem in jsondatasorted:
+      if elem[0] not in jsondatagrouped:
+        jsondatagrouped[elem[0]] = []
+      jsondatagrouped[elem[0]].append(elem[1:])
 
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
