@@ -1128,11 +1128,11 @@ def get_apistat():
 
       if deviceapikey == "":
         deviceapikey=tag.get('deviceapikey', "")
-      elif deviceid == "":
+      if deviceid == "":
          deviceid=tag.get('deviceid', "")
-      elif devicename == "":
+      if devicename == "":
          devicename=tag.get('devicename', "")
-      elif useremail == "":
+      if useremail == "":
          useremail=tag.get('useremail', "")
 
       #mydatetimestr = str(fields['time'])
