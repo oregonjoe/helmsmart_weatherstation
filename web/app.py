@@ -1052,12 +1052,16 @@ def get_apistat():
     #serieskeys= serieskeys + deviceid + "' "
     if deviceapikey != "":
       serieskeys="apikey='"+ deviceapikey + "' "
+      csvFileType = "apikey"
     elif useremail != "":
       serieskeys="useremail='"+ useremail + "' "
+      csvFileType = "useremail"
     elif deviceid != "":
       serieskeys="deviceid='"+ deviceid + "' "
+      csvFileType = "deviceid"
     elif devicename != "":
       serieskeys="devicename='"+ devicename + "' "
+      csvFileType = "devicename"
     else:
       return jsonify( message='Error in get_apistat query - no keys specified', status='error')
 
@@ -1237,7 +1241,7 @@ def get_apistat():
 
       response = make_response(strvalue)
       response.headers['Content-Type'] = 'text/csv'
-      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPILOG_"+ deviceapikey + "_" + myfiledate + ".csv"
+      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPILOG_by_"+ csvFileType + "_" + myfiledate + ".csv"
       return response
       
 
