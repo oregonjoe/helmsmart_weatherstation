@@ -967,6 +967,9 @@ def update_api_log(apikey, userdata, apifunction, apidata):
 def get_apistat():
 
   deviceapikey = request.args.get('apikey','')
+  deviceid = request.args.get('deviceid','')
+  useremail = request.args.get('email','')
+  devicename = request.args.get('devicename','')
   Interval = request.args.get('interval',"5min")
   rollup = request.args.get('mode',"sum")
 
@@ -998,16 +1001,16 @@ def get_apistat():
     resolution = epochtimes[2]
 
   
-  userdata = getuserinfo(deviceapikey)
-  log.info("freeboard get_apistat userdata %s", userdata)
+  #userdata = getuserinfo(deviceapikey)
+  #log.info("freeboard get_apistat userdata %s", userdata)
   
-  useremail = userdata.get('useremail',"")
+  #useremail = userdata.get('useremail',"")
   log.info("freeboard get_apistat useremail %s", useremail)
 
 
-  deviceid = userdata.get('deviceid',"")
+  #deviceid = userdata.get('deviceid',"")
   
-  log.info("freeboard get_apistat deviceid %s", deviceid)
+
 
   if deviceid == "":
       callback = request.args.get('callback')
@@ -1017,40 +1020,16 @@ def get_apistat():
   measurement = 'HS_' + str(deviceid)
 
 
-  devicename = userdata.get('devicename',"")
+  #devicename = userdata.get('devicename',"")
+  log.info("freeboard get_apistat deviceapikey %s", deviceapikey)
+  log.info("freeboard get_apistat useremail %s", useremail)
+  log.info("freeboard get_apistat deviceid %s", deviceid)
   log.info("freeboard get_apistat devicename %s", devicename)  
 
   response = None
   
   measurement = "HelmSmartAPI"
   
-  stat0 = '---'
-  stat1 = '---'
-  stat2 = '---'
-  stat3 = '---'
-  stat4 = '---'
-  stat5 = '---'
-  stat6 = '---'
-  stat7 = '---'
-  stat8 = '---'
-  stat9 = '---'
-  stat10 = '---'
-  stat11 = '---'
-  stat12 = '---'
-  stat13 = '---'
-  stat14 = '---'
-  stat15 = '---'
-  stat16 = '---'
-
-
-  #conn = db_pool.getconn()
-
-  #cursor = conn.cursor()
-  #cursor.execute("select deviceid, devicename from user_devices")
-  #records = cursor.fetchall()
-
-  #db_pool.putconn(conn)   
-
 
 
   try:
@@ -1077,8 +1056,16 @@ def get_apistat():
 
     #serieskeys=" deviceid='"
     #serieskeys= serieskeys + deviceid + "' "
-
-    serieskeys="apikey='"+ deviceapikey + "' "
+    if deviceapikey != "":
+      serieskeys="apikey='"+ deviceapikey + "' "
+    elif deviceapikey != "":
+      serieskeys="useremail='"+ useremail + "' "
+    elif deviceapikey != "":
+      serieskeys="deviceid='"+ deviceid + "' "
+    elif deviceapikey != "":
+      serieskeys="devicename='"+ devicename + "' "
+    else:
+      return jsonify( message='Error in get_apistat query - no keys specified', status='error')
 
 
     #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,  serieskeys, startepoch, endepoch, resolution) 
@@ -1134,12 +1121,25 @@ def get_apistat():
     log.info("get_apistat Get InfluxDB series keys %s", keys)
 
 
+
+
+
     strvalue=""
     
     for series in keys:
 
       tag = series['tags']
       log.info("get_apistat series tags2 %s ", tag)
+
+
+      if deviceapikey == "":
+        deviceapikey=tag.get(deviceapikey, "")
+      elif deviceid == "":
+         deviceid=tag.get(deviceid, "")
+      elif devicename == "":
+         devicename=tag.get(devicename, "")
+      elif useremail == "":
+         useremail=tag.get(useremail, "")
 
       #mydatetimestr = str(fields['time'])
       strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
