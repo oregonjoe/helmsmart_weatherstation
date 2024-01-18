@@ -1005,17 +1005,11 @@ def get_apistat():
   #log.info("freeboard get_apistat userdata %s", userdata)
   
   #useremail = userdata.get('useremail',"")
-  log.info("freeboard get_apistat useremail %s", useremail)
+  #log.info("freeboard get_apistat useremail %s", useremail)
 
 
   #deviceid = userdata.get('deviceid',"")
   
-
-
-  if deviceid == "":
-      callback = request.args.get('callback')
-      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
-
   measurement = "HelmSmart"
   measurement = 'HS_' + str(deviceid)
 
