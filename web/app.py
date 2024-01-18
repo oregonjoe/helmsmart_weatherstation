@@ -1052,11 +1052,11 @@ def get_apistat():
     #serieskeys= serieskeys + deviceid + "' "
     if deviceapikey != "":
       serieskeys="apikey='"+ deviceapikey + "' "
-    elif deviceapikey != "":
+    elif useremail != "":
       serieskeys="useremail='"+ useremail + "' "
-    elif deviceapikey != "":
+    elif deviceid != "":
       serieskeys="deviceid='"+ deviceid + "' "
-    elif deviceapikey != "":
+    elif devicename != "":
       serieskeys="devicename='"+ devicename + "' "
     else:
       return jsonify( message='Error in get_apistat query - no keys specified', status='error')
