@@ -1188,14 +1188,17 @@ def get_apistat():
           #log.info('freeboard_environmental:: ts %s:  ' % ts)
           
           #strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
-          strvalue = {'apitag': tag['apifunction']   ,  'value': fields['apidata']}
+          #strvalue = {'apitag': tag['apifunction']   ,  'value': fields['apidata']}
+          strvalue = {'apikey': tag['apikey'], 'useremail': tag['useremail'], 'deviceid': tag['deviceid'], 'devicename': tag['devicename'], 'apitag': tag['apifunction']   ,  'value': fields['apidata']}
           jsondata.append(strvalue)
 
 
 
 
 
-    jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+    #jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+    #jsondata = sorted(jsondata,key=itemgetter('useremail','deviceid', 'apikey' , 'apitag'), reverse=True)
+    jsondata = sorted(jsondata,key=itemgetter('useremail','deviceid', 'apikey' , 'apitag'))
     log.info('get_apistat:  jsondata %s:  ', jsondata)
 
     total = 0
