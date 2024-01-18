@@ -1294,7 +1294,7 @@ def get_apistat():
 
   #return jsonify(status='error',  update=False )
   callback = request.args.get('callback')
-  return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+  return '{0}({1})'.format(callback, {'update':'true', 'status':'success' })
 
 @app.route('/get_apistat_all')
 @cross_origin()
