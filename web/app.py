@@ -1189,7 +1189,7 @@ def get_apistat():
           
           #strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
           #strvalue = {'apitag': tag['apifunction']   ,  'value': fields['apidata']}
-          strvalue = {'apikey': tag['apikey'], 'useremail': tag['useremail'], 'deviceid': tag['deviceid'], 'devicename': tag['devicename'], 'apitag': tag['apifunction']   ,  'value': fields['apidata']}
+          strvalue = { 'useremail': tag['useremail'], 'apikey': tag['apikey'], 'deviceid': tag['deviceid'], 'devicename': tag['devicename'], 'apitag': tag['apifunction']   ,  'value': fields['apidata']}
           jsondata.append(strvalue)
 
 
@@ -1221,15 +1221,17 @@ def get_apistat():
 
     elif dataformat == 'csv':
 
-      #strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
-      strvalue ='APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' +devicename + ', Email:' + useremail + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
 
-      strvalue = strvalue + 'API tag , API values \r\n'
+      #strvalue ='Email:' + useremail + ',APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' + devicename + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
+      strvalue ='Email:' + useremail + ',APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' + devicename + + 'API tag , API values,  date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
+      
+      #strvalue = strvalue + 'API tag , API values \r\n'
       
       list_length = len(jsondata)
       for i in range(list_length):
 
-        strvalue = strvalue + jsondata[i]['apitag'] + ', ' + str(jsondata[i]['value']) + ' \r\n'
+        #strvalue = strvalue + jsondata[i]['apitag'] + ', ' + str(jsondata[i]['value']) + ' \r\n'
+        strvalue = strvalue + jsondata[i]['useremail'] + ', ' + str(jsondata[i]['apikey']) + ', ' + jsondata[i]['deviceid'] + ', ' + str(jsondata[i]['devicename']) + ', ' + jsondata[i]['apitag'] + ', ' + str(jsondata[i]['value']) + ' \r\n'
 
       strvalue = strvalue + 'Total API values = ' + str(total) + ' \r\n'
 
