@@ -968,7 +968,7 @@ def get_apistat():
 
   deviceapikey = request.args.get('apikey','')
   deviceid = request.args.get('deviceid','')
-  useremail = request.args.get('email','')
+  useremail = request.args.get('useremail','')
   devicename = request.args.get('devicename','')
   Interval = request.args.get('interval',"5min")
   rollup = request.args.get('mode',"sum")
