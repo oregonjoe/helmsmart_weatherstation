@@ -1223,7 +1223,7 @@ def get_apistat():
 
 
       #strvalue ='Email:' + useremail + ',APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' + devicename + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
-      strvalue ='Email:' + useremail + ',APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' + devicename + 'API tag , API values,  date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
+      strvalue ='User Email, APIkey, DeviceID, DeviceName, API tag , API values,  date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
       
       #strvalue = strvalue + 'API tag , API values \r\n'
       
