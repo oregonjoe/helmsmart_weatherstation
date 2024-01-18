@@ -1087,7 +1087,7 @@ def get_apistat():
       #raise
 
     
-    #return jsonify(results=response)
+    return jsonify(results=response)
     
     #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
     
@@ -1127,13 +1127,13 @@ def get_apistat():
 
 
       if deviceapikey == "":
-        deviceapikey=tag.get(deviceapikey, "")
+        deviceapikey=tag.get('deviceapikey', "")
       elif deviceid == "":
-         deviceid=tag.get(deviceid, "")
+         deviceid=tag.get('deviceid', "")
       elif devicename == "":
-         devicename=tag.get(devicename, "")
+         devicename=tag.get('devicename', "")
       elif useremail == "":
-         useremail=tag.get(useremail, "")
+         useremail=tag.get('useremail', "")
 
       #mydatetimestr = str(fields['time'])
       strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
