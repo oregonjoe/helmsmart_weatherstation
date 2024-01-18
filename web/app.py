@@ -1156,40 +1156,40 @@ def get_apistat():
           #deviceid = tag['deviceid']
           #for record in records:
           #log.info("get_dbstat deviceid %s - devicename %s", record[0], record[1])    
-          if tag['apikey'] == deviceapikey:
-            #devicename = record[1]
+          #if tag['apikey'] == deviceapikey:
+          #devicename = record[1]
 
-            #strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}        
-            #strvalue = {'epoch': fields['time'],  'records': fields['records']}
-            #strvalue = {'epoch': fields['time'],  'value': fields['records']}
-            mydatetimestr = str(fields['time'])
-            #log.info('freeboard_environmental:: mydatetimestr %s:  ' % mydatetimestr)
-            
-            # convert string to datetime opject
-            mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S%z')
-            #log.info('freeboard_environmental:: mydatetime %s:  ' % mydatetime)
+          #strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}        
+          #strvalue = {'epoch': fields['time'],  'records': fields['records']}
+          #strvalue = {'epoch': fields['time'],  'value': fields['records']}
+          mydatetimestr = str(fields['time'])
+          #log.info('freeboard_environmental:: mydatetimestr %s:  ' % mydatetimestr)
+          
+          # convert string to datetime opject
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S%z')
+          #log.info('freeboard_environmental:: mydatetime %s:  ' % mydatetime)
 
-            # set timezone of new datetime opbect
-            mydatetimetz = mydatetime.replace(tzinfo=ZoneInfo(mytimezone))
-            #log.info('freeboard_environmental:: mydatetimetz %s:  ' % mydatetimetz)    
+          # set timezone of new datetime opbect
+          mydatetimetz = mydatetime.replace(tzinfo=ZoneInfo(mytimezone))
+          #log.info('freeboard_environmental:: mydatetimetz %s:  ' % mydatetimetz)    
 
-            ## This dosnt work for python 3.11 anymore
-            ## throws an OverFlow error
-            ##dtt = mydatetimetz.timetuple()
-            ##ts = int(mktime(dtt)*1000)
-            ## So we need to convert datetime directly to seconds and add in timezone offesets
+          ## This dosnt work for python 3.11 anymore
+          ## throws an OverFlow error
+          ##dtt = mydatetimetz.timetuple()
+          ##ts = int(mktime(dtt)*1000)
+          ## So we need to convert datetime directly to seconds and add in timezone offesets
 
-            # get seconds offset for selected timezone
-            tzoffset = mydatetimetz.utcoffset().total_seconds()
-            #log.info('freeboard_environmental:: tzoffset %s:  ' % tzoffset)           
+          # get seconds offset for selected timezone
+          tzoffset = mydatetimetz.utcoffset().total_seconds()
+          #log.info('freeboard_environmental:: tzoffset %s:  ' % tzoffset)           
 
-            # adjust GMT time for slected timezone for display purposes
-            ts = int((mydatetime.timestamp() + tzoffset) * 1000 )
-            #log.info('freeboard_environmental:: ts %s:  ' % ts)
-            
-            #strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
-            strvalue = {'apitag': tag['apifunction']   ,  'value': fields['apidata']}
-            jsondata.append(strvalue)
+          # adjust GMT time for slected timezone for display purposes
+          ts = int((mydatetime.timestamp() + tzoffset) * 1000 )
+          #log.info('freeboard_environmental:: ts %s:  ' % ts)
+          
+          #strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
+          strvalue = {'apitag': tag['apifunction']   ,  'value': fields['apidata']}
+          jsondata.append(strvalue)
 
 
 
