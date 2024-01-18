@@ -1087,7 +1087,7 @@ def get_apistat():
       #raise
 
     
-    return jsonify(results=response)
+    #return jsonify(results=response)
     
     #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
     
